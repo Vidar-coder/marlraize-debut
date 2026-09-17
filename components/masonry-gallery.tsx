@@ -9,12 +9,12 @@ const cinzel = Cinzel({
   weight: ["400", "600", "700"],
 })
 
-const IVORY = "#fffaf4"
-const GOLD = "var(--color-welcome-gold)"
-const NAVY = "var(--color-welcome-navy)"
-const GOLD_BORDER = "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)"
-const NAV_GOLD =
-  "linear-gradient(180deg, #E8D5A3 0%, #CDB072 52%, #C4A265 100%)"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const ROSE_BORDER = "color-mix(in srgb, #E6A39B 38%, transparent)"
+const NAV_ROSE =
+  "linear-gradient(180deg, #E6A39B 0%, #C89E8C 52%, #976C58 100%)"
 
 const MAX_IMAGE_RETRIES = 5
 const DISPLAY_RETRY_MS = 6000
@@ -104,7 +104,7 @@ function RetryableGalleryImage({
           ? undefined
           : {
               aspectRatio: `${width} / ${height}`,
-              backgroundColor: "color-mix(in srgb, var(--color-welcome-gold) 10%, #fffaf4)",
+              backgroundColor: "color-mix(in srgb, #E6A39B 10%, #FDECE6)",
             }
       }
     >
@@ -174,14 +174,14 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
       <div className="mb-6 flex justify-end">
         <div
           className={`${cinzel.className} text-[0.6875rem] font-semibold uppercase tracking-[0.18em] sm:text-xs`}
-          style={{ color: GOLD }}
+          style={{ color: ROSE }}
         >
           {images.length} photos
         </div>
       </div>
 
       {images.length === 0 ? (
-        <div className="font-goudy-italic text-center" style={{ color: "var(--color-welcome-text)" }}>
+        <div className="font-goudy-italic text-center" style={{ color: COCOA }}>
           No images to display.
         </div>
       ) : (
@@ -197,7 +197,7 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
               <div
                 className="relative w-full overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl"
                 style={{
-                  borderColor: GOLD_BORDER,
+                  borderColor: ROSE_BORDER,
                   backgroundColor: IVORY,
                 }}
               >
@@ -230,8 +230,8 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
               type="button"
               className={`${cinzel.className} absolute left-2 top-1/2 -translate-y-1/2 rounded-full border px-4 py-2.5 text-lg shadow-lg transition-all duration-200 hover:scale-110 sm:left-4`}
               style={{
-                background: NAV_GOLD,
-                borderColor: GOLD_BORDER,
+                background: NAV_ROSE,
+                borderColor: ROSE_BORDER,
                 color: IVORY,
               }}
               onClick={() => setLightboxIdx((i) => (i == null ? null : (i - 1 + images.length) % images.length))}
@@ -247,7 +247,7 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
               sizes="100vw"
               className="rounded-xl object-contain"
               style={{
-                border: `1px solid ${GOLD_BORDER}`,
+                border: `1px solid ${ROSE_BORDER}`,
                 imageOrientation: "from-image",
               }}
               priority
@@ -257,8 +257,8 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
               type="button"
               className={`${cinzel.className} absolute right-2 top-1/2 -translate-y-1/2 rounded-full border px-4 py-2.5 text-lg shadow-lg transition-all duration-200 hover:scale-110 sm:right-4`}
               style={{
-                background: NAV_GOLD,
-                borderColor: GOLD_BORDER,
+                background: NAV_ROSE,
+                borderColor: ROSE_BORDER,
                 color: IVORY,
               }}
               onClick={() => setLightboxIdx((i) => (i == null ? null : (i + 1) % images.length))}
@@ -270,8 +270,8 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
               type="button"
               className={`${cinzel.className} absolute right-3 top-3 rounded-full border px-4 py-2 text-[0.6875rem] font-semibold uppercase tracking-[0.16em] shadow-lg transition-all duration-200 hover:scale-105`}
               style={{
-                backgroundColor: NAVY,
-                borderColor: GOLD_BORDER,
+                backgroundColor: COCOA,
+                borderColor: ROSE_BORDER,
                 color: IVORY,
               }}
               onClick={() => setLightboxIdx(null)}
@@ -287,8 +287,8 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
           type="button"
           className={`${cinzel.className} rounded-full border px-6 py-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] shadow-lg transition-all duration-200 hover:scale-105 sm:text-[0.6875rem] sm:tracking-[0.2em]`}
           style={{
-            background: NAV_GOLD,
-            borderColor: GOLD_BORDER,
+            background: NAV_ROSE,
+            borderColor: ROSE_BORDER,
             color: IVORY,
           }}
           onClick={() => topRef.current?.scrollIntoView({ behavior: "smooth" })}

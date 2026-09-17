@@ -244,20 +244,22 @@ export default function Home() {
                 animate={cinematicEntry ? "show" : detailsVisible ? "show" : "hidden"}
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
-              <GuestList />
               <Welcome />
+              {/* <LoveStory /> */}
               <Countdown />
-              <Details />
+              {/* <Details /> */}
               <Gallery />
-              <Entourage />
+              {/* <Entourage /> */}
               <WeddingTimeline />
               <Messages />
-              <FAQ />
+              {/* <FAQ />
+              <GuestList />
+              <BookOfGuests />
               <Registry />
               <SnapShare />
               <SeeYouThere />
 
-              <Footer />
+              <Footer /> */}
               </motion.div>
             </div>
           </motion.div>

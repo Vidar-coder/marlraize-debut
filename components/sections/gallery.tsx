@@ -8,7 +8,6 @@ import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react"
 import { Cinzel } from "next/font/google"
 import { Section } from "@/components/section"
 import { sectionType } from "@/lib/section-typography"
-import { sectionBackground } from "@/lib/section-background"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -27,21 +26,27 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const IVORY = "#fffaf4"
-const GOLD = "var(--color-welcome-gold)"
-const NAVY = "var(--color-welcome-navy)"
-const SCRIPT = "var(--color-welcome-green)"
-const BODY = "var(--color-welcome-text)"
-const NAV_GOLD =
-  "linear-gradient(180deg, #E8D5A3 0%, #CDB072 52%, #C4A265 100%)"
-const GOLD_BORDER = "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const SAGE = "#A5B29A"
+const NAV_ROSE =
+  "linear-gradient(180deg, #E6A39B 0%, #C89E8C 52%, #976C58 100%)"
+const ROSE_BORDER = "color-mix(in srgb, #E6A39B 38%, transparent)"
 
-const goldDividerStyle = {
-  background: "linear-gradient(to right, transparent, var(--color-welcome-gold), transparent)",
+const galleryBackground = `
+  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, #F4CFC8 42%, transparent) 0%, transparent 55%),
+  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${SAGE} 14%, transparent) 0%, transparent 58%),
+  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${ROSE} 16%, transparent) 0%, transparent 55%),
+  linear-gradient(180deg, ${IVORY} 0%, #FCE7E1 48%, ${IVORY} 100%)
+`.trim()
+
+const roseDividerStyle = {
+  background: "linear-gradient(to right, transparent, #E6A39B, transparent)",
 } as const
 
-const goldDividerStyleLeft = {
-  background: "linear-gradient(to left, transparent, var(--color-welcome-gold), transparent)",
+const roseDividerStyleLeft = {
+  background: "linear-gradient(to left, transparent, #E6A39B, transparent)",
 } as const
 
 const CORNER_DECO_CLASS =
@@ -50,9 +55,9 @@ const CORNER_DECO_CLASS =
 function OutsideDivider() {
   return (
     <div className="flex items-center justify-center gap-1.5">
-      <span className="h-px w-6 sm:w-10" style={goldDividerStyle} />
-      <span className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1" style={{ background: GOLD }} aria-hidden />
-      <span className="h-px w-6 sm:w-10" style={goldDividerStyleLeft} />
+      <span className="h-px w-6 sm:w-10" style={roseDividerStyle} />
+      <span className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1" style={{ background: ROSE }} aria-hidden />
+      <span className="h-px w-6 sm:w-10" style={roseDividerStyleLeft} />
     </div>
   )
 }
@@ -73,13 +78,13 @@ function GalleryTitle() {
         } as React.CSSProperties
       }
     >
-      <span className="sr-only">Gallery — our favorite moments</span>
+      <span className="sr-only">Gallery — her favorite moments</span>
       <span
         aria-hidden
         className={`${theSeasons.className} block uppercase leading-[0.9] tracking-[0.04em] min-[400px]:tracking-[0.08em] sm:tracking-[0.12em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
-          color: NAVY,
+          color: COCOA,
         }}
       >
         Gallery
@@ -89,28 +94,28 @@ function GalleryTitle() {
         className={`${aboveTheBeyond.className} relative z-10 mx-auto mt-1.5 block w-fit max-w-full px-1 leading-[0.88] sm:mt-2 sm:leading-[0.9]`}
         style={{
           fontSize: "var(--script-size)",
-          color: SCRIPT,
+          color: ROSE,
           textShadow:
-            "0 1px 0 color-mix(in srgb, var(--color-welcome-bg) 95%, white), 0 0 10px color-mix(in srgb, var(--color-welcome-bg) 65%, white)",
+            "0 1px 0 color-mix(in srgb, #FDECE6 95%, white), 0 0 10px color-mix(in srgb, #FDECE6 65%, white)",
         }}
       >
-        our favorite moments
+        her favorite moments
       </span>
     </h2>
   )
 }
 
 const galleryItems = [
-  { image: "/mobile-background/couples (23).webp", text: " " },
-  { image: "/mobile-background/couples (8).webp", text: " " },
-  { image: "/mobile-background/couples (26).webp", text: " " },
-  { image: "/mobile-background/couples (22).webp", text: " " },
-  { image: "/mobile-background/couples (7).webp", text: " " },
-  { image: "/mobile-background/couples (31).webp", text: " " },
-  { image: "/mobile-background/couples (36).webp", text: " " },
-  { image: "/mobile-background/couples (73).webp", text: " " },
-  { image: "/mobile-background/couples (74).webp", text: " " },
-  { image: "/mobile-background/couples (70).webp", text: " " },
+  { image: "/mobile-background/debut (1).webp", text: " " },
+  { image: "/mobile-background/debut (2).webp", text: " " },
+  { image: "/mobile-background/debut (3).webp", text: " " },
+  { image: "/mobile-background/debut (4).webp", text: " " },
+  { image: "/mobile-background/debut (5).webp", text: " " },
+  { image: "/mobile-background/debut (6).webp", text: " " },
+  { image: "/mobile-background/debut (7).webp", text: " " },
+  { image: "/mobile-background/debut (8).webp", text: " " },
+  { image: "/mobile-background/debut (9).webp", text: " " },
+  { image: "/mobile-background/debut (10).webp", text: " " },
 
 ]
 
@@ -192,7 +197,7 @@ export function Gallery() {
   return (
     <div
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full`}
-      style={{ background: sectionBackground }}
+      style={{ background: galleryBackground }}
     >
       <Section
         id="gallery"
@@ -243,29 +248,29 @@ export function Gallery() {
         </div>
         <p
           className={`${cinzel.className} mx-auto mt-4 max-w-[20rem] px-2 text-[0.6875rem] font-semibold leading-snug tracking-[0.12em] min-[400px]:max-w-none min-[400px]:text-[0.75rem] min-[400px]:tracking-[0.16em] sm:mt-6 sm:text-[0.9375rem] sm:tracking-[0.2em] md:text-base md:tracking-[0.22em]`}
-          style={{ color: GOLD }}
+          style={{ color: ROSE }}
         >
-          Our Moments
+          Her Moments
         </p>
         <div className="mx-auto mt-3 sm:mt-4 md:mt-5">
           <GalleryTitle />
         </div>
         <p
           className={`font-goudy-italic mx-auto mt-4 max-w-xl px-2 sm:mt-5 md:mt-6 ${sectionType.textRelaxed}`}
-          style={{ color: BODY }}
+          style={{ color: COCOA }}
         >
-          From our first chapter to this beautiful season of commitment — every moment has been a
-          testament to love, faith, and grace.
+          From her first chapter to this season of eighteen — every moment has been a testament to
+          love, faith, and grace.
         </p>
 
         <div className="mt-4 flex items-center justify-center gap-1.5 sm:mt-5">
-          <span className="h-px w-8 sm:w-12 md:w-16" style={goldDividerStyle} />
+          <span className="h-px w-8 sm:w-12 md:w-16" style={roseDividerStyle} />
           <Camera
             className="h-3.5 w-3.5 sm:h-4 sm:w-4"
-            style={{ color: GOLD }}
+            style={{ color: ROSE }}
             aria-hidden
           />
-          <span className="h-px w-8 sm:w-12 md:w-16" style={goldDividerStyleLeft} />
+          <span className="h-px w-8 sm:w-12 md:w-16" style={roseDividerStyleLeft} />
         </div>
       </div>
 
@@ -276,8 +281,8 @@ export function Gallery() {
             <div
               className="h-12 w-12 animate-spin rounded-full border-[3px]"
               style={{
-                borderColor: "color-mix(in srgb, var(--color-welcome-gold) 30%, transparent)",
-                borderTopColor: GOLD,
+                borderColor: "color-mix(in srgb, #E6A39B 30%, transparent)",
+                borderTopColor: ROSE,
               }}
             />
           </div>
@@ -304,7 +309,7 @@ export function Gallery() {
                       className="absolute -inset-0.5 rounded-lg opacity-0 blur-sm transition-opacity duration-300 group-active:opacity-100"
                       style={{
                         background:
-                          "color-mix(in srgb, var(--color-welcome-gold) 32%, transparent)",
+                          "color-mix(in srgb, #E6A39B 32%, transparent)",
                       }}
                     />
 
@@ -323,12 +328,12 @@ export function Gallery() {
                       className="absolute top-2 right-2 rounded-full px-2 py-1 backdrop-blur-sm"
                       style={{
                         backgroundColor:
-                          "color-mix(in srgb, var(--color-welcome-navy) 65%, transparent)",
+                          "color-mix(in srgb, #976C58 65%, transparent)",
                       }}
                     >
                       <span
                         className="text-xs font-medium"
-                        style={{ color: "var(--color-welcome-bg)" }}
+                        style={{ color: IVORY }}
                       >
                         {index + 1}/{galleryItems.length}
                       </span>
@@ -339,7 +344,7 @@ export function Gallery() {
 
               <p
                 className={`${cinzel.className} mt-2 text-center tracking-[0.16em] uppercase ${sectionType.label}`}
-                style={{ color: GOLD }}
+                style={{ color: ROSE }}
               >
                 Swipe to explore
               </p>
@@ -362,7 +367,7 @@ export function Gallery() {
                     className="absolute -inset-0.5 rounded-xl opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100"
                     style={{
                       background:
-                        "color-mix(in srgb, var(--color-welcome-gold) 28%, transparent)",
+                        "color-mix(in srgb, #E6A39B 28%, transparent)",
                     }}
                   />
 
@@ -381,12 +386,12 @@ export function Gallery() {
                     className="absolute top-2 right-2 rounded-full px-2 py-1 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
                     style={{
                       backgroundColor:
-                        "color-mix(in srgb, var(--color-welcome-navy) 65%, transparent)",
+                        "color-mix(in srgb, #976C58 65%, transparent)",
                     }}
                   >
                     <span
                       className="text-xs font-medium"
-                      style={{ color: "var(--color-welcome-bg)" }}
+                      style={{ color: IVORY }}
                     >
                       {index + 1}/{galleryItems.length}
                     </span>
@@ -398,10 +403,10 @@ export function Gallery() {
             <div className="mt-10 sm:mt-12 md:mt-14 flex justify-center">
               <Link
                 href="/gallery"
-                className={`${cinzel.className} inline-flex items-center justify-center rounded-full border px-8 py-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] shadow-[0_8px_18px_color-mix(in_srgb,var(--color-welcome-gold)_22%,transparent)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] sm:text-[0.6875rem] sm:tracking-[0.22em]`}
+                className={`${cinzel.className} inline-flex items-center justify-center rounded-full border px-8 py-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] shadow-[0_8px_18px_color-mix(in_srgb,#E6A39B_22%,transparent)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] sm:text-[0.6875rem] sm:tracking-[0.22em]`}
                 style={{
-                  background: NAV_GOLD,
-                  borderColor: GOLD_BORDER,
+                  background: NAV_ROSE,
+                  borderColor: ROSE_BORDER,
                   color: IVORY,
                 }}
               >
@@ -482,12 +487,12 @@ export function Gallery() {
                 style={{
                   backgroundColor: "rgba(0,0,0,0.4)",
                   borderColor:
-                    "color-mix(in srgb, var(--color-welcome-gold) 50%, transparent)",
+                    "color-mix(in srgb, #E6A39B 50%, transparent)",
                 }}
               >
                 <span
                   className="text-sm font-medium sm:text-base"
-                  style={{ color: "var(--color-welcome-bg)" }}
+                  style={{ color: IVORY }}
                 >
                   {currentIndex + 1} / {galleryItems.length}
                 </span>

@@ -820,7 +820,7 @@ export const Hero: React.FC<HeroProps> = ({
                 aria-label="Break the wax seal to open the invitation"
               >
                 <Image
-                  src="/decoration/seal.png"
+                  src="/monogram/seal.png"
                   alt=""
                   fill
                   priority
