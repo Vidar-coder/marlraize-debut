@@ -8,18 +8,18 @@ import './loading-screen.css';
 
 export { LOADING_BG_PHOTOS };
 
-const MOBILE_BG_PHOTO_COUNT = 77;
-const DESKTOP_BG_PHOTO_COUNT = 38;
+const MOBILE_BG_PHOTO_COUNT = 60;
+const DESKTOP_BG_PHOTO_COUNT = 17;
 const MARQUEE_SAMPLE_SIZE = 24;
 
 export const MOBILE_BG_PHOTOS = Array.from(
   { length: MOBILE_BG_PHOTO_COUNT },
-  (_, index) => encodeURI(`/mobile-background/couples (${index + 1}).webp`),
+  (_, index) => encodeURI(`/mobile-background/debut (${index + 1}).webp`),
 );
 
 export const DESKTOP_BG_PHOTOS = Array.from(
   { length: DESKTOP_BG_PHOTO_COUNT },
-  (_, index) => encodeURI(`/desktop-background/couples (${index + 1}).webp`),
+  (_, index) => encodeURI(`/desktop-background/debut (${index + 1}).webp`),
 );
 
 function pickRandomPhotos(photos: readonly string[], count: number) {

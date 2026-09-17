@@ -9,8 +9,10 @@ export const siteConfig = {
     brideNickname: "Jonna", //Ltryl
     groom: "Ricky A. Balila II", //Ltryl B. Benitez
     groomNickname: "Ricky",
-    monogram:"/monogram/mono-image.png" ,//Ltryl
-    backgroundMusic:"/background_music/The 1975 - About You.mp3"
+    debut: "Marlriaze Shane Omilig",
+    debutNickname: "Marlriaze",
+    monogram:"/monogram/monogram-new.png" ,//Ltryl
+    backgroundMusic:"/background_music/Enchanted (Taylor Swift Cover) by Joseph William Morgan [Bridgerton Season 4 (Netflix Series)].mp3"
   },
   googleAPI:{
     messageForm: "https://docs.google.com/forms/d/e/1FAIpQLScd8BvFRvQPqJIKUhSiaimQ2jjnmb3zqAMoYIRBaj6F1QuSWQ/formResponse",   //done
@@ -27,9 +29,9 @@ export const siteConfig = {
       "https://docs.google.com/forms/d/e/1FAIpQLSfeGlEl4CMXWefdvCw6AOPHFS1ROku_rs-Gbofa2LkVJ0sLGQ/viewform", 
   },
   wedding: {
-    date: "November 19, 2026",
-    time: "9:30 AM",
-    venue: "St. Benedict Parish",
+    date: "October 10, 2026",
+    time: "5:00 PM",
+    venue: "Smallville",
     tagline: "are getting married!!!!!",
     theme: "Whimsical Spring Minimalist",
     motif: "#FFCA8B, #FFB383, #F6CEC8, #E99997, #C8C29E",

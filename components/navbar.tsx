@@ -12,8 +12,7 @@ const cormorant = Cormorant_Garamond({
   weight: ["400"],
 })
 
-// Palette lives in globals.css → @theme inline → --color-motif-*
-// Edit there once to update every component.
+// Debut palette: #FCE7E1 #F4CFC8 #E6A39B #C89E8C #976C58 #A5B29A #FDECE6
 
 
 const navLinks = [
@@ -92,19 +91,19 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
         isScrolled
-          ? "shadow-[0_12px_32px_rgba(91,74,55,0.22)]"
-          : "shadow-[0_6px_18px_rgba(91,74,55,0.12)]"
+          ? "shadow-[0_12px_32px_rgba(151,108,88,0.22)]"
+          : "shadow-[0_6px_18px_rgba(151,108,88,0.12)]"
       }`}
       style={{
         background:
-          "linear-gradient(180deg, #CDB072 0%, #C4A265 40%, #A98B52 100%)",
-        borderBottom: "1px solid color-mix(in srgb, #8A6F3E 45%, transparent)",
+          "linear-gradient(180deg, #E6A39B 0%, #C89E8C 42%, #976C58 100%)",
+        borderBottom: "1px solid color-mix(in srgb, #976C58 45%, transparent)",
       }}
     >
       {isScrolled && (
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-[color-mix(in_srgb,#7A6340_12%,transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-[color-mix(in_srgb,#976C58_12%,transparent)] pointer-events-none" />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/18 via-transparent to-[color-mix(in_srgb,#7A6340_16%,transparent)] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/18 via-transparent to-[color-mix(in_srgb,#976C58_16%,transparent)] pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 relative">
         <div className="flex justify-between items-center h-12 sm:h-14 md:h-16">
@@ -112,9 +111,9 @@ export function Navbar() {
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12">
               <Image
                 src={siteConfig.couple.monogram}
-                alt={`${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Monogram`}
+                alt={`${siteConfig.couple.debutNickname} Monogram`}
                 fill
-                className="object-contain group-hover:scale-110 group-active:scale-105 transition-all duration-500 drop-shadow-[0_2px_8px_rgba(42,34,28,0.35)] group-hover:drop-shadow-[0_4px_14px_rgba(255,250,244,0.45)]"
+                className="object-contain group-hover:scale-110 group-active:scale-105 transition-all duration-500 drop-shadow-[0_2px_8px_rgba(151,108,88,0.35)] group-hover:drop-shadow-[0_4px_14px_rgba(253,236,230,0.45)]"
                 style={{
                   filter: "brightness(0) invert(1)",
                 }}
@@ -134,20 +133,20 @@ export function Navbar() {
                   href={link.href}
                   className={`whitespace-nowrap px-2 py-2 text-xs lg:px-2.5 lg:text-sm ${cormorant.className} font-medium rounded-lg transition-all duration-500 relative group ${
                     isActive
-                      ? "text-[#B49A68] bg-white/95 backdrop-blur-md shadow-[0_6px_18px_rgba(42,34,28,0.16)] border border-white/80"
-                      : "text-white hover:text-white hover:bg-white/16 hover:border hover:border-white/35 hover:shadow-[0_6px_18px_rgba(42,34,28,0.12)] hover:scale-105 active:scale-95 bg-transparent border border-transparent"
+                      ? "text-[#976C58] bg-[#FDECE6]/95 backdrop-blur-md shadow-[0_6px_18px_rgba(151,108,88,0.16)] border border-[#FCE7E1]/80"
+                      : "text-[#FDECE6] hover:text-white hover:bg-white/16 hover:border hover:border-white/35 hover:shadow-[0_6px_18px_rgba(151,108,88,0.12)] hover:scale-105 active:scale-95 bg-transparent border border-transparent"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-white transition-all duration-500 rounded-full ${
+                    className={`absolute bottom-0 left-0 h-0.5 bg-[#FDECE6] transition-all duration-500 rounded-full ${
                       isActive
-                        ? "w-full shadow-[0_0_10px_rgba(255,250,244,0.7)]"
-                        : "w-0 group-hover:w-full group-hover:shadow-[0_0_8px_rgba(255,250,244,0.55)]"
+                        ? "w-full shadow-[0_0_10px_rgba(253,236,230,0.7)]"
+                        : "w-0 group-hover:w-full group-hover:shadow-[0_0_8px_rgba(253,236,230,0.55)]"
                     }`}
                   />
                   {isActive && (
-                    <div className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#B49A68] animate-pulse shadow-[0_0_6px_#B49A68]" />
+                    <div className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#E6A39B] animate-pulse shadow-[0_0_6px_#E6A39B]" />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
                 </Link>
@@ -161,16 +160,16 @@ export function Navbar() {
               items={menuItems}
               socialItems={[]}
               displaySocials={false}
-              menuButtonColor="#fffaf4"
-              openMenuButtonColor="var(--color-welcome-gold)"
+              menuButtonColor="#FDECE6"
+              openMenuButtonColor="#976C58"
               changeMenuColorOnOpen={true}
               colors={[
-                "var(--color-motif-silver)",
-                "var(--color-welcome-gold)",
-                "var(--color-motif-cream)",
-                "var(--color-motif-soft)",
+                "#F4CFC8",
+                "#E6A39B",
+                "#FCE7E1",
+                "#FDECE6",
               ]}
-              accentColor="var(--color-welcome-gold)"
+              accentColor="#E6A39B"
               isFixed={true}
               onMenuOpen={() => {}}
               onMenuClose={() => {}}

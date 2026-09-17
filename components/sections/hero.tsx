@@ -25,8 +25,8 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const IVORY = "#fffaf4"
-const CHAMPAGNE = "#E8D5A3"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
 const entryEase = [0.22, 1, 0.36, 1] as const
 const heroTitleSize = {
   main: "clamp(3.35rem, min(16vw, 18cqi), 8.25rem)",
@@ -36,19 +36,19 @@ const heroTitleSize = {
 const SLIDE_MS = 5600
 
 const MOBILE_HERO_PHOTOS = [
-  encodeURI("/mobile-background/couples (9).webp"),
-  encodeURI("/mobile-background/couples (14).webp"),
-  encodeURI("/mobile-background/couples (69).webp"),
-  encodeURI("/mobile-background/couples (62).webp"),
-  encodeURI("/mobile-background/couples (76).webp"),
+  encodeURI("/mobile-background/debut (12).webp"),
+  encodeURI("/mobile-background/debut (17).webp"),
+  encodeURI("/mobile-background/debut (24).webp"),
+  encodeURI("/mobile-background/debut (30).webp"),
+  encodeURI("/mobile-background/debut (4).webp"),
 ]
 
 const DESKTOP_HERO_PHOTOS = [
-  encodeURI("/desktop-background/couples (34).webp"),
-  encodeURI("/desktop-background/couples (27).webp"),
-  encodeURI("/mobile-background/couples (23).webp"),
-  encodeURI("/mobile-background/couples (31).webp"),
-  encodeURI("/mobile-background/couples (11).webp"),
+  encodeURI("/desktop-background/debut (1).webp"),
+  encodeURI("/desktop-background/debut (2).webp"),
+  encodeURI("/desktop-background/debut (3).webp"),
+  encodeURI("/desktop-background/debut (5).webp"),
+  encodeURI("/desktop-background/debut (4).webp"),
 ]
 
 interface TimeLeft {
@@ -225,8 +225,8 @@ function HeroSlideshow() {
         className="absolute inset-0"
         style={{
           background: `
-            linear-gradient(180deg, rgb(42 34 28 / 46%) 0%, rgb(42 34 28 / 22%) 26%, rgb(42 34 28 / 28%) 48%, rgb(42 34 28 / 52%) 100%),
-            radial-gradient(ellipse 88% 62% at 50% 42%, rgb(42 34 28 / 28%) 0%, transparent 72%)
+            linear-gradient(180deg, rgb(151 108 88 / 46%) 0%, rgb(151 108 88 / 22%) 26%, rgb(151 108 88 / 28%) 48%, rgb(151 108 88 / 52%) 100%),
+            radial-gradient(ellipse 88% 62% at 50% 42%, rgb(151 108 88 / 28%) 0%, transparent 72%)
           `,
         }}
       />
@@ -248,12 +248,12 @@ function CountdownUnit({
   return (
     <div className="flex min-w-[3rem] flex-1 flex-col items-center sm:min-w-[3.5rem]">
       <span
-        className={`${cinzel.className} text-[clamp(1.2rem,5.4vw,1.75rem)] font-semibold leading-none tabular-nums tracking-[0.04em] text-[#fffaf4]`}
+        className={`${cinzel.className} text-[clamp(1.2rem,5.4vw,1.75rem)] font-semibold leading-none tabular-nums tracking-[0.04em] text-[#FDECE6]`}
       >
         {display}
       </span>
       <span
-        className={`${cinzel.className} mt-1.5 text-[0.48rem] font-medium uppercase tracking-[0.16em] text-[#fffaf4]/80 sm:mt-2 sm:text-[0.54rem]`}
+        className={`${cinzel.className} mt-1.5 text-[0.48rem] font-medium uppercase tracking-[0.16em] text-[#FDECE6]/80 sm:mt-2 sm:text-[0.54rem]`}
       >
         {label}
       </span>
@@ -263,14 +263,14 @@ function CountdownUnit({
 
 function HeroCountdown() {
   const timeLeft = useCeremonyCountdown()
-  const colonClass = `${cinzel.className} shrink-0 self-start px-0.5 text-[clamp(1.2rem,5.4vw,1.75rem)] font-semibold leading-none tabular-nums text-[#fffaf4] sm:px-1`
+  const colonClass = `${cinzel.className} shrink-0 self-start px-0.5 text-[clamp(1.2rem,5.4vw,1.75rem)] font-semibold leading-none tabular-nums text-[#FDECE6] sm:px-1`
 
   return (
     <div className="relative z-10 w-full px-4 py-4 sm:px-6 sm:py-5">
       <p
-        className={`${cinzel.className} text-center text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-[#fffaf4] sm:text-[0.64rem] sm:tracking-[0.26em]`}
+        className={`${cinzel.className} text-center text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-[#FDECE6] sm:text-[0.64rem] sm:tracking-[0.26em]`}
       >
-        Time left til we say I do
+        Time left til her debut
       </p>
       <div
         className="mx-auto mt-2 flex max-w-md items-start justify-center sm:mt-2.5 sm:max-w-lg"
@@ -356,10 +356,10 @@ export function Hero() {
             className="pointer-events-none absolute left-1/2 top-[42%] h-[min(18rem,58vw)] w-[min(36rem,96%)] -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{
               background:
-                "radial-gradient(ellipse at center, rgb(42 34 28 / 46%) 0%, rgb(42 34 28 / 18%) 46%, transparent 72%)",
+                "radial-gradient(ellipse at center, rgb(151 108 88 / 46%) 0%, rgb(151 108 88 / 18%) 46%, transparent 72%)",
             }}
           />
-          <span className="sr-only">You&apos;re Invited!</span>
+          <span className="sr-only">You&apos;re Invited to her debut</span>
           <span
             aria-hidden
             className={`${theSeasons.className} relative block uppercase leading-[0.78] tracking-[0.06em] min-[400px]:tracking-[0.09em] sm:tracking-[0.11em] md:tracking-[0.12em]`}
@@ -367,7 +367,7 @@ export function Hero() {
               fontSize: "var(--hero-title-size)",
               color: IVORY,
               textShadow:
-                "0 1px 0 rgb(255 250 244 / 35%), 0 2px 18px rgb(42 34 28 / 55%), 0 12px 36px rgb(42 34 28 / 40%)",
+                "0 1px 0 rgb(253 236 230 / 35%), 0 2px 18px rgb(151 108 88 / 55%), 0 12px 36px rgb(151 108 88 / 40%)",
             }}
           >
             You
@@ -384,15 +384,15 @@ export function Hero() {
             style={{
               marginTop: "var(--hero-script-overlap)",
               fontSize: "var(--hero-script-size)",
-              color: CHAMPAGNE,
+              color: ROSE,
               textShadow:
-                "0 1px 0 rgb(255 250 244 / 28%), 0 4px 18px rgb(42 34 28 / 50%), 0 0 28px rgb(201 176 114 / 45%)",
+                "0 1px 0 rgb(253 236 230 / 28%), 0 4px 18px rgb(151 108 88 / 50%), 0 0 28px rgb(230 163 155 / 45%)",
             }}
           >
             Invited
             <span
               className={`${cinzel.className} relative -top-[0.08em] ml-[0.05em] inline-block font-normal`}
-              style={{ color: CHAMPAGNE }}
+              style={{ color: ROSE }}
             >
               !
             </span>
@@ -400,24 +400,24 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className={`${cinzel.className} mt-4 max-w-[22rem] text-[clamp(0.68rem,2.8vw,0.86rem)] font-medium uppercase leading-[1.7] tracking-[0.18em] text-[#fffaf4]/92 sm:mt-5 sm:max-w-none sm:tracking-[0.22em]`}
-          style={{ textShadow: "0 1px 12px rgb(42 34 28 / 40%)" }}
+          className={`${cinzel.className} mt-4 max-w-[22rem] text-[clamp(0.68rem,2.8vw,0.86rem)] font-medium uppercase leading-[1.7] tracking-[0.18em] text-[#FDECE6]/92 sm:mt-5 sm:max-w-none sm:tracking-[0.22em]`}
+          style={{ textShadow: "0 1px 12px rgb(151 108 88 / 40%)" }}
           {...fadeUp(0.2)}
         >
-          Save the date — we are getting married
+          Save the date — she turns eighteen
         </motion.p>
 
         <motion.p
-          className={`${theSeasons.className} mt-4 text-[clamp(1.85rem,8.5vw,3.65rem)] font-normal leading-none tracking-[0.08em] text-[#fffaf4] sm:mt-5`}
-          style={{ textShadow: "0 2px 18px rgb(42 34 28 / 45%)" }}
+          className={`${theSeasons.className} mt-4 text-[clamp(1.85rem,8.5vw,3.65rem)] font-normal leading-none tracking-[0.08em] text-[#FDECE6] sm:mt-5`}
+          style={{ textShadow: "0 2px 18px rgb(151 108 88 / 45%)" }}
           {...fadeUp(0.28)}
         >
           {numericDate}
         </motion.p>
 
         <motion.p
-          className={`${cinzel.className} mt-4 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[#fffaf4]/88 sm:text-[0.7rem] sm:tracking-[0.2em]`}
-          style={{ textShadow: "0 1px 10px rgb(42 34 28 / 40%)" }}
+          className={`${cinzel.className} mt-4 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[#FDECE6]/88 sm:text-[0.7rem] sm:tracking-[0.2em]`}
+          style={{ textShadow: "0 1px 10px rgb(151 108 88 / 40%)" }}
           {...fadeUp(0.36)}
         >
           {ceremonyName} · {ceremonyTimePhrase}
@@ -428,7 +428,7 @@ export function Hero() {
         className="relative z-10 mt-auto w-full"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, rgb(42 34 28 / 28%) 28%, color-mix(in srgb, var(--color-welcome-gold) 72%, #7a6340) 100%)",
+            "linear-gradient(180deg, transparent 0%, rgb(151 108 88 / 28%) 28%, color-mix(in srgb, #E6A39B 72%, #976C58) 100%)",
         }}
         {...fadeUp(0.42)}
       >

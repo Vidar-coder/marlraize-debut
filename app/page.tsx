@@ -212,7 +212,7 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
                 <Suspense fallback={<div className="w-full h-full bg-gradient-to-b from-primary/10 to-secondary/5" />}>
-                  <Silk speed={8} scale={0.9} color="#EFDAC1" noiseIntensity={0} rotation={0.3} />
+                  <Silk speed={8} scale={0.9} color="#E6A39B" noiseIntensity={0} rotation={0.3} />
                 </Suspense>
               </motion.div>
             )}
@@ -245,15 +245,18 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
               <GuestList />
-              <WeddingTimeline />
+              <Welcome />
+              <Countdown />
               <Details />
               <Gallery />
               <Entourage />
+              <WeddingTimeline />
               <Messages />
               <FAQ />
               <Registry />
               <SnapShare />
               <SeeYouThere />
+
               <Footer />
               </motion.div>
             </div>

@@ -16,10 +16,14 @@ interface LoadingScreenProps {
 }
 
 const COUNTDOWN_BOXES = [
-  { src: '/envelope/boxes (5).JPG' },
-  { src: '/envelope/boxes (2).JPG' },
-  { src: '/envelope/boxes (3).JPG' },
+  { src: encodeURI('/envelope/box (1).jpg') },
+  { src: encodeURI('/envelope/box (2).jpg') },
+  { src: encodeURI('/envelope/box (3).jpg') },
 ];
+
+const DEBUT_MARK = '/Details/debut.png';
+const DEBUT_NAME_MARK = '/Details/debut-name.png';
+const TURNS_EIGHTEEN_MARK = '/Details/turns-eighteen.png';
 
 const STAGGER_DELAY_MS = 1500;
 const BOX_TRANSITION_MS = 1200;
@@ -105,7 +109,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
     };
   }, [onComplete, onFadeStart]);
 
-  const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`;
+  const debutName = siteConfig.couple.debut;
+  const debutLabel = `${debutName} debut, turns eighteen`;
 
   return (
     <motion.div
@@ -143,7 +148,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
         <div className="flex flex-col items-center justify-center w-full pt-8 sm:pt-12 md:pt-16 px-4 sm:px-6 flex-shrink-0">
           <div className="w-full max-w-lg mx-auto">
             <div className="flex flex-col items-center">
-              <span className="loading-screen__std-headline mt-4 sm:mt-6">Save the Date</span>
               <span className="loading-screen__std-kicker">
                 {countdown.days} more days to go
               </span>
@@ -155,9 +159,38 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
           <div
             className="loading-screen__std-names"
             role="img"
-            aria-label={coupleNames}
+            aria-label={debutLabel}
           >
-            <span className="loading-screen__std-names-mark" aria-hidden="true" />
+            <Image
+              src={DEBUT_MARK}
+              alt=""
+              width={2172}
+              height={724}
+              className="loading-screen__std-mark loading-screen__std-mark--debut"
+              sizes="(min-width: 768px) 18rem, 70vw"
+              style={{ height: 'auto' }}
+              priority
+            />
+            <Image
+              src={DEBUT_NAME_MARK}
+              alt=""
+              width={1744}
+              height={718}
+              className="loading-screen__std-mark loading-screen__std-mark--name"
+              sizes="(min-width: 768px) 30rem, 90vw"
+              style={{ height: 'auto' }}
+              priority
+            />
+            <Image
+              src={TURNS_EIGHTEEN_MARK}
+              alt=""
+              width={2097}
+              height={631}
+              className="loading-screen__std-mark loading-screen__std-mark--eighteen"
+              sizes="(min-width: 768px) 26rem, 86vw"
+              style={{ height: 'auto' }}
+              priority
+            />
           </div>
         </div>
 
@@ -180,7 +213,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
               >
                 <Image
                   src={item.src}
-                  alt={coupleNames}
+                  alt={debutName}
                   fill
                   className="object-cover scale-105"
                   sizes="(max-width: 640px) 28vw, 160px"
@@ -202,7 +235,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
         <div className="flex flex-col items-center w-full pt-1 pb-6 sm:pb-8 px-6 flex-shrink-0">
           <p className="loading-screen__std-eyebrow">You are invited</p>
           <p className="loading-screen__std-copy">
-            We can&apos;t wait to celebrate with you
+            Join us as she turns eighteen
           </p>
           <div className="loading-screen__std-rule" aria-hidden="true" />
           <p className="loading-screen__std-status">Crafting your invitation experience</p>

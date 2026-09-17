@@ -27,16 +27,20 @@ interface HeroProps {
 }
 
 const DESKTOP_POLAROID_PHOTOS = [
-  { src: '/envelope/boxes (5).JPG', side: 'left' as const },
-  { src: '/envelope/boxes (2).JPG', side: 'center' as const },
-  { src: '/envelope/boxes (3).JPG', side: 'right' as const },
-  { src: '/envelope/boxes (4).JPG', side: 'right-inner' as const },
+  { src: encodeURI('/envelope/box (1).jpg'), side: 'left' as const },
+  { src: encodeURI('/envelope/box (2).jpg'), side: 'center' as const },
+  { src: encodeURI('/envelope/box (3).jpg'), side: 'right' as const },
+  { src: encodeURI('/envelope/box (5).jpg'), side: 'right-inner' as const },
 ];
 
 const MOBILE_ENVELOPE_PHOTOS = [
-  { src: '/envelope/boxes (4).JPG', side: 'left' as const },
-  { src: '/envelope/boxes (3).JPG', side: 'right' as const },
+  { src: encodeURI('/envelope/box (1).jpg'), side: 'left' as const },
+  { src: encodeURI('/envelope/box (3).jpg'), side: 'right' as const },
 ] as const;
+
+const DEBUT_MARK = '/Details/debut.png';
+const DEBUT_NAME_MARK = '/Details/debut-name.png';
+const TURNS_EIGHTEEN_MARK = '/Details/turns-eighteen.png';
 
 const photoInteractEase: Transition = { duration: 0.38, ease: [0.22, 1, 0.36, 1] };
 const focusLiftEase: Transition = { duration: 1.15, ease: [0.22, 1, 0.36, 1] };
@@ -96,9 +100,8 @@ export const Hero: React.FC<HeroProps> = ({
   const [isExiting, setIsExiting] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
 
-  const groomName = siteConfig.couple.groomNickname;
-  const brideName = siteConfig.couple.brideNickname;
-  const coupleNames = `${groomName} & ${brideName}`;
+  const debutName = siteConfig.couple.debut;
+  const debutLabel = `${debutName} debut, turns eighteen`;
 
   const letterDateNumeric = useMemo(() => {
     const parsed = parseWeddingDate(siteConfig.ceremony.date ?? siteConfig.wedding.date);
@@ -632,14 +635,44 @@ export const Hero: React.FC<HeroProps> = ({
                   >
                     <div className="env-invite-letter-frame" aria-hidden="true" />
                     <div className="env-invite-letter-inner">
-                      <span className="env-invite-letter-label">Save the Date</span>
-                      <span className="env-invite-letter-date">{letterDateNumeric}</span>
-                      <span className="env-invite-letter-invited">You are Invited</span>
                       <div
                         className="env-invite-letter-names"
                         role="img"
-                        aria-label={coupleNames}
-                      />
+                        aria-label={debutLabel}
+                      >
+                        <Image
+                          src={DEBUT_MARK}
+                          alt=""
+                          width={2172}
+                          height={724}
+                          className="env-invite-letter-mark env-invite-letter-mark--debut"
+                          sizes="(min-width: 768px) 200px, 120px"
+                          style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
+                          priority
+                        />
+                        <Image
+                          src={DEBUT_NAME_MARK}
+                          alt=""
+                          width={1744}
+                          height={718}
+                          className="env-invite-letter-mark env-invite-letter-mark--name"
+                          sizes="(min-width: 768px) 240px, 150px"
+                          style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
+                          priority
+                        />
+                        <Image
+                          src={TURNS_EIGHTEEN_MARK}
+                          alt=""
+                          width={2097}
+                          height={631}
+                          className="env-invite-letter-mark env-invite-letter-mark--eighteen"
+                          sizes="(min-width: 768px) 220px, 140px"
+                          style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
+                          priority
+                        />
+                      </div>
+                      <span className="env-invite-letter-date">{letterDateNumeric}</span>
+                      <span className="env-invite-letter-invited">You are Invited</span>
                     </div>
                   </motion.div>
 
@@ -649,7 +682,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <PolaroidPhoto
                           side="left"
                           src={MOBILE_ENVELOPE_PHOTOS[0].src}
-                          alt={`${groomName} portrait`}
+                          alt={`${debutName} portrait`}
                           variants={mobileEnvelopePhotoLeftVariants}
                           photoState={photoState}
                           liftedPhoto={liftedPhoto}
@@ -663,7 +696,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <PolaroidPhoto
                           side="right"
                           src={MOBILE_ENVELOPE_PHOTOS[1].src}
-                          alt={`${brideName} portrait`}
+                          alt={`${debutName} portrait`}
                           variants={mobileEnvelopePhotoRightVariants}
                           photoState={photoState}
                           liftedPhoto={liftedPhoto}
@@ -680,7 +713,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <PolaroidPhoto
                           side="left"
                           src={DESKTOP_POLAROID_PHOTOS[0].src}
-                          alt={coupleNames}
+                          alt={debutName}
                           variants={photoLeftVariants}
                           photoState={photoState}
                           liftedPhoto={liftedPhoto}
@@ -693,7 +726,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <PolaroidPhoto
                           side="center"
                           src={DESKTOP_POLAROID_PHOTOS[1].src}
-                          alt={coupleNames}
+                          alt={debutName}
                           variants={photoCenterVariants}
                           photoState={photoState}
                           liftedPhoto={liftedPhoto}
@@ -706,7 +739,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <PolaroidPhoto
                           side="right"
                           src={DESKTOP_POLAROID_PHOTOS[2].src}
-                          alt={coupleNames}
+                          alt={debutName}
                           variants={photoRightVariants}
                           photoState={photoState}
                           liftedPhoto={liftedPhoto}
@@ -719,7 +752,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <PolaroidPhoto
                           side="right-inner"
                           src={DESKTOP_POLAROID_PHOTOS[3].src}
-                          alt={coupleNames}
+                          alt={debutName}
                           variants={photoRightInnerVariants}
                           photoState={photoState}
                           liftedPhoto={liftedPhoto}
@@ -854,7 +887,7 @@ export const Hero: React.FC<HeroProps> = ({
           </motion.p>
         )}
         <motion.h2 variants={revealCopyItemVariants}>
-          We can't wait to celebrate with you!
+          Join us as she turns eighteen
         </motion.h2>
       </motion.div>
 

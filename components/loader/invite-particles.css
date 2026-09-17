@@ -2,10 +2,10 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  --particle-1: #f8f3ea;
-  --particle-2: #b49a68;
-  --particle-3: #e8ded0;
-  --particle-4: #c99f91;
+  --particle-1: #fdece6;
+  --particle-2: #e6a39b;
+  --particle-3: #f4cfc8;
+  --particle-4: #a5b29a;
 }
 
 .invite-particles__particle {

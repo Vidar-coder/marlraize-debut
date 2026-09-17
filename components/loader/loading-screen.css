@@ -11,16 +11,20 @@
 
 .loading-screen,
 .invite-photo-backdrop {
-  --ls-warm-base: var(--color-welcome-navy, #5e5144);
-  --ls-warm-mid: var(--color-motif-blush, #c99f91);
-  --ls-warm-glow: var(--color-welcome-gold, #b49a68);
-  /* Legacy aliases — warm linen palette (no sage/forest green) */
-  --ls-forest: var(--color-motif-cream, #e8ded0);
-  --ls-sage: var(--color-motif-blush, #c99f91);
-  --ls-mustard: var(--color-motif-yellow, #b49a68);
-  --ls-butter: #f0dfa8;
-  --ls-cream: var(--color-motif-soft, #f5f0e7);
-  --ls-ink: var(--color-welcome-text, #6b5c4d);
+  --ls-petal: #fce7e1;
+  --ls-blush: #f4cfc8;
+  --ls-rose: #e6a39b;
+  --ls-taupe: #c89e8c;
+  --ls-cocoa: #976c58;
+  --ls-sage: #a5b29a;
+  --ls-cream: #fdece6;
+  --ls-warm-base: var(--ls-cocoa);
+  --ls-warm-mid: var(--ls-rose);
+  --ls-warm-glow: var(--ls-taupe);
+  --ls-forest: var(--ls-petal);
+  --ls-mustard: var(--ls-taupe);
+  --ls-butter: var(--ls-blush);
+  --ls-ink: var(--ls-cocoa);
 }
 
 .loading-screen {
@@ -93,7 +97,7 @@
   height: 100%;
   width: 82vw;
   overflow: hidden;
-  background: color-mix(in srgb, var(--color-motif-cream) 70%, white);
+  background: color-mix(in srgb, var(--ls-petal) 70%, white);
 }
 
 .loading-screen__slide-photo > img {
@@ -109,23 +113,23 @@
   background:
     linear-gradient(
       180deg,
-      rgb(42 34 28 / 52%) 0%,
-      rgb(42 34 28 / 22%) 18%,
-      rgb(42 34 28 / 8%) 42%,
-      rgb(42 34 28 / 18%) 68%,
-      rgb(42 34 28 / 58%) 100%
+      rgb(151 108 88 / 48%) 0%,
+      rgb(151 108 88 / 18%) 18%,
+      rgb(230 163 155 / 8%) 42%,
+      rgb(151 108 88 / 16%) 68%,
+      rgb(151 108 88 / 54%) 100%
     ),
     radial-gradient(
       ellipse 92% 52% at 50% 46%,
-      color-mix(in srgb, var(--ls-warm-glow) 10%, transparent) 0%,
+      color-mix(in srgb, var(--ls-rose) 16%, transparent) 0%,
       transparent 72%
     );
 }
 
 .loading-screen--invitation .loading-screen__slide-photo,
 .invite-photo-backdrop .loading-screen__slide-photo {
-  background: color-mix(in srgb, var(--color-motif-cream) 45%, white);
-  filter: sepia(0.04) saturate(0.92) brightness(1.08) contrast(1.02) hue-rotate(-8deg);
+  background: color-mix(in srgb, var(--ls-petal) 45%, white);
+  filter: saturate(1.04) brightness(1.05) contrast(1.02);
 }
 
 @keyframes ls-slide-left {
@@ -157,13 +161,13 @@
   pointer-events: none;
 }
 
-/* Mediterranean invitation — ivory, champagne, blush (no green) */
+/* Debut invitation — blush, rose, cocoa, sage */
 .loading-screen--invitation {
-  background: var(--color-motif-soft, #f5f0e7);
+  background: var(--ls-cream);
 }
 
 .loading-screen--invitation .loading-screen__backdrop {
-  background-color: var(--color-motif-soft, #f5f0e7);
+  background-color: var(--ls-cream);
 }
 
 .loading-screen--invitation .loading-screen__save-date::before {
@@ -175,68 +179,68 @@
   background:
     linear-gradient(
       180deg,
-      rgb(42 34 28 / 38%) 0%,
-      rgb(42 34 28 / 8%) 22%,
+      rgb(151 108 88 / 34%) 0%,
+      rgb(151 108 88 / 8%) 22%,
       transparent 42%,
-      rgb(42 34 28 / 16%) 72%,
-      rgb(42 34 28 / 48%) 100%
+      rgb(151 108 88 / 14%) 72%,
+      rgb(151 108 88 / 42%) 100%
     );
 }
 
 .loading-screen__std-headline {
   font-family: var(--font-brittany);
-  color: #fffaf4;
+  color: var(--ls-cream);
   font-size: clamp(2.8rem, 10vw, 5.5rem);
   line-height: 1.05;
   font-weight: 400;
   text-shadow:
-    0 1px 2px rgb(42 34 28 / 55%),
-    0 8px 22px rgb(42 34 28 / 45%);
+    0 1px 2px rgb(151 108 88 / 55%),
+    0 8px 22px rgb(151 108 88 / 40%);
 }
 
 .loading-screen__std-kicker {
-  margin-top: 0.85rem;
+  margin-top: 0.35rem;
   text-align: center;
   white-space: nowrap;
   font-family: var(--font-cinzel, "Cinzel", serif);
-  color: #fff8f0;
+  color: var(--ls-cream);
   font-size: clamp(0.82rem, 3.8vw, 1.35rem);
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  text-shadow: 0 1px 10px rgb(42 34 28 / 55%);
+  text-shadow: 0 1px 10px rgb(151 108 88 / 55%);
 }
 
 .loading-screen__std-box {
-  border: 1px solid rgb(255 251 247 / 45%);
+  border: 1px solid rgb(253 236 230 / 50%);
   box-shadow:
-    0 0 0 1px rgb(255 251 247 / 18%),
-    0 16px 36px rgb(42 34 28 / 12%),
-    inset 0 1px 0 rgb(255 251 247 / 35%);
-  background: rgb(255 251 247 / 18%);
+    0 0 0 1px rgb(230 163 155 / 22%),
+    0 16px 36px rgb(151 108 88 / 16%),
+    inset 0 1px 0 rgb(253 236 230 / 40%);
+  background: rgb(253 236 230 / 16%);
   backdrop-filter: blur(6px);
 }
 
 .loading-screen__std-box-overlay {
   background: linear-gradient(
     180deg,
-    rgb(42 34 28 / 18%) 0%,
-    rgb(42 34 28 / 6%) 38%,
-    rgb(42 34 28 / 72%) 100%
+    rgb(151 108 88 / 12%) 0%,
+    rgb(230 163 155 / 6%) 38%,
+    rgb(151 108 88 / 70%) 100%
   );
 }
 
 .loading-screen__std-box-num {
   font-family: var(--font-cinzel, "Cinzel", serif);
   font-weight: 500;
-  color: #fffaf4;
-  text-shadow: 0 1px 10px rgb(42 34 28 / 70%);
+  color: var(--ls-cream);
+  text-shadow: 0 1px 10px rgb(151 108 88 / 70%);
 }
 
 .loading-screen__std-box-label {
-  color: rgb(255 248 240 / 92%);
+  color: rgb(253 236 230 / 92%);
   letter-spacing: 0.2em;
-  text-shadow: 0 1px 8px rgb(42 34 28 / 60%);
+  text-shadow: 0 1px 8px rgb(151 108 88 / 60%);
 }
 
 .loading-screen__std-eyebrow {
@@ -245,8 +249,8 @@
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #fff8f0;
-  text-shadow: 0 1px 10px rgb(42 34 28 / 55%);
+  color: var(--ls-cream);
+  text-shadow: 0 1px 10px rgb(151 108 88 / 55%);
 }
 
 .loading-screen__std-copy {
@@ -258,8 +262,8 @@
   font-style: italic;
   font-weight: 500;
   line-height: 1.35;
-  color: #fffaf4;
-  text-shadow: 0 1px 10px rgb(42 34 28 / 55%);
+  color: var(--ls-cream);
+  text-shadow: 0 1px 10px rgb(151 108 88 / 55%);
 }
 
 .loading-screen__std-names-slot {
@@ -279,15 +283,15 @@
   left: 50%;
   top: 50%;
   z-index: 0;
-  width: min(96%, 30rem);
-  height: min(92%, 11rem);
+  width: min(96%, 32rem);
+  height: min(96%, 16rem);
   transform: translate(-50%, -50%);
   pointer-events: none;
   background: radial-gradient(
-    ellipse 72% 62% at 50% 50%,
-    rgb(42 34 28 / 58%) 0%,
-    rgb(42 34 28 / 32%) 42%,
-    rgb(42 34 28 / 10%) 68%,
+    ellipse 74% 68% at 50% 50%,
+    rgb(151 108 88 / 58%) 0%,
+    rgb(151 108 88 / 32%) 42%,
+    rgb(151 108 88 / 10%) 68%,
     transparent 82%
   );
 }
@@ -295,32 +299,82 @@
 .loading-screen__std-names {
   position: relative;
   z-index: 1;
-  display: block;
-  width: min(88%, 24rem);
-  aspect-ratio: 1774 / 887;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  width: min(90%, 26rem);
   margin: 0 auto;
   pointer-events: none;
   user-select: none;
-  filter:
-    drop-shadow(0 0 1px rgb(255 250 244 / 80%))
-    drop-shadow(0 1px 1px rgb(42 34 28 / 90%))
-    drop-shadow(0 3px 8px rgb(42 34 28 / 70%))
-    drop-shadow(0 10px 28px rgb(42 34 28 / 45%));
 }
 
-.loading-screen__std-names-mark {
+.loading-screen__std-mark {
   display: block;
   width: 100%;
-  height: 100%;
-  background-color: #fffaf4;
-  -webkit-mask-image: url("/decoration/couple-name.png");
-  mask-image: url("/decoration/couple-name.png");
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+  height: auto;
+  object-fit: contain;
+  margin-block: 0.15rem;
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 1px rgb(253 236 230 / 80%))
+    drop-shadow(0 1px 1px rgb(151 108 88 / 90%))
+    drop-shadow(0 4px 12px rgb(151 108 88 / 55%));
+}
+
+.loading-screen__std-mark--debut {
+  width: 80%;
+}
+
+.loading-screen__std-mark--name {
+  width: 94%;
+}
+
+.loading-screen__std-mark--eighteen {
+  width: 86%;
+}
+
+@media (min-width: 768px) {
+  .loading-screen__std-names {
+    width: min(86%, 30rem);
+    gap: 1.1rem;
+  }
+
+  .loading-screen__std-mark {
+    margin-block: 0.2rem;
+  }
+
+  .loading-screen__std-mark--debut {
+    width: 76%;
+  }
+
+  .loading-screen__std-mark--eighteen {
+    width: 80%;
+  }
+}
+
+@media (max-height: 760px) {
+  .loading-screen__std-names {
+    width: min(82%, 22rem);
+    gap: 0.55rem;
+  }
+
+  .loading-screen__std-mark {
+    margin-block: 0.08rem;
+  }
+
+  .loading-screen__std-mark--debut {
+    width: 72%;
+  }
+
+  .loading-screen__std-mark--eighteen {
+    width: 78%;
+  }
+
+  .loading-screen__std-names-slot::before {
+    height: min(96%, 13rem);
+  }
 }
 
 .loading-screen__std-rule {
@@ -331,7 +385,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgb(255 251 247 / 55%) 50%,
+    rgb(230 163 155 / 70%) 50%,
     transparent 100%
   );
 }
@@ -344,9 +398,9 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgb(255 248 240 / 70%);
+  background: rgb(253 236 230 / 78%);
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 2px rgb(255 251 247 / 25%);
+  box-shadow: 0 0 0 2px rgb(165 178 154 / 35%);
 }
 
 .loading-screen__std-status {
@@ -356,16 +410,16 @@
   font-weight: 500;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: #fff8f0;
-  text-shadow: 0 1px 10px rgb(42 34 28 / 55%);
+  color: var(--ls-cream);
+  text-shadow: 0 1px 10px rgb(151 108 88 / 55%);
 }
 
 .loading-screen__std-track {
   height: 3px;
   border-radius: 999px;
   overflow: hidden;
-  background: color-mix(in srgb, var(--color-motif-silver) 55%, white);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-welcome-gold) 22%, transparent);
+  background: color-mix(in srgb, var(--ls-blush) 55%, white);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ls-rose) 28%, transparent);
 }
 
 .loading-screen__std-bar {
@@ -374,11 +428,11 @@
   transition: width 0.3s ease-out;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--color-motif-yellow) 85%, white) 0%,
-    var(--color-welcome-gold) 55%,
-    color-mix(in srgb, var(--color-motif-blush) 35%, var(--color-welcome-gold)) 100%
+    var(--ls-rose) 0%,
+    var(--ls-taupe) 55%,
+    var(--ls-sage) 100%
   );
-  box-shadow: 0 0 10px color-mix(in srgb, var(--color-welcome-gold) 45%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--ls-rose) 45%, transparent);
 }
 
 .loading-screen__overlay {

@@ -1,8 +1,8 @@
-/** Curated loader backdrop — smallest sharp couple photos for a fast first paint. */
+/** Curated loader backdrop — smallest sharp debut photos for a fast first paint. */
 export const LOADING_BG_PHOTOS = [
-  "/desktop-background/couples (9).webp",
-  "/desktop-background/couples (10).webp",
-  "/desktop-background/couples (8).webp",
-  "/desktop-background/couples (16).webp",
-  "/desktop-background/couples (15).webp",
+  "/desktop-background/debut (1).webp",
+  "/desktop-background/debut (5).webp",
+  "/desktop-background/debut (9).webp",
+  "/desktop-background/debut (12).webp",
+  "/desktop-background/debut (15).webp",
 ].map((src) => encodeURI(src))
