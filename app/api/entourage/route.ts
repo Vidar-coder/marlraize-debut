@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { debutCourtApiRows, mergeSheetWithDebutCourt } from "@/content/debut-court"
 import { siteConfig } from "@/content/site"
 import {
   fetchGoogleScriptJson,
@@ -30,13 +31,17 @@ export async function GET() {
       return payload
     })
 
-    return NextResponse.json(data, { status: 200, headers: listResponseHeaders })
+    const rows = Array.isArray(data) ? data : []
+    return NextResponse.json(mergeSheetWithDebutCourt(rows), {
+      status: 200,
+      headers: listResponseHeaders,
+    })
   } catch (error) {
-    console.error('Error fetching entourage:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch entourage' },
-      { status: 500 }
-    )
+    console.error("Error fetching entourage:", error)
+    return NextResponse.json(debutCourtApiRows(), {
+      status: 200,
+      headers: listResponseHeaders,
+    })
   }
 }
 

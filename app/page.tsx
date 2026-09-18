@@ -245,21 +245,21 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
               <Welcome />
-              {/* <LoveStory /> */}
+              <LoveStory />
               <Countdown />
-              {/* <Details /> */}
+              <Details />
               <Gallery />
-              {/* <Entourage /> */}
+              <Entourage />
               <WeddingTimeline />
               <Messages />
-              {/* <FAQ />
+              <FAQ />
               <GuestList />
               <BookOfGuests />
               <Registry />
               <SnapShare />
               <SeeYouThere />
 
-              <Footer /> */}
+              <Footer />
               </motion.div>
             </div>
           </motion.div>

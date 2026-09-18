@@ -36,7 +36,7 @@ const heroTitleSize = {
 const SLIDE_MS = 5600
 
 const MOBILE_HERO_PHOTOS = [
-  encodeURI("/mobile-background/debut (12).webp"),
+  encodeURI("/mobile-background/debut (14).webp"),
   encodeURI("/mobile-background/debut (17).webp"),
   encodeURI("/mobile-background/debut (24).webp"),
   encodeURI("/mobile-background/debut (30).webp"),

@@ -7,7 +7,6 @@ import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
-import { sectionBackground } from "@/lib/section-background"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -26,24 +25,34 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const IVORY = "#fffaf4"
-const GOLD = "var(--color-welcome-gold)"
-const NAVY = "var(--color-welcome-navy)"
-const SCRIPT = "var(--color-welcome-green)"
-const BODY = "var(--color-welcome-text)"
-const GOLD_BORDER = "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)"
-const GOLD_BORDER_SOFT = "color-mix(in srgb, var(--color-welcome-gold) 22%, transparent)"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const SAGE = "#A5B29A"
+const GOLD = ROSE
+const NAVY = COCOA
+const SCRIPT = ROSE
+const BODY = COCOA
+const GOLD_BORDER = "color-mix(in srgb, #E6A39B 38%, transparent)"
+const GOLD_BORDER_SOFT = "color-mix(in srgb, #E6A39B 22%, transparent)"
 
 const goldDividerStyle = {
-  background: "linear-gradient(to right, transparent, var(--color-welcome-gold), transparent)",
+  background: "linear-gradient(to right, transparent, #E6A39B, transparent)",
 } as const
 
 const goldDividerStyleLeft = {
-  background: "linear-gradient(to left, transparent, var(--color-welcome-gold), transparent)",
+  background: "linear-gradient(to left, transparent, #E6A39B, transparent)",
 } as const
 
 const CORNER_DECO_CLASS =
   "block h-auto w-auto max-w-[120px] sm:max-w-[180px] md:max-w-[260px] lg:max-w-[320px] xl:max-w-[380px] select-none"
+
+const sectionBackground = `
+  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, #F4CFC8 42%, transparent) 0%, transparent 55%),
+  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${SAGE} 14%, transparent) 0%, transparent 58%),
+  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${ROSE} 16%, transparent) 0%, transparent 55%),
+  linear-gradient(180deg, ${IVORY} 0%, #FCE7E1 48%, ${IVORY} 100%)
+`.trim()
 
 const ct = {
   label: sectionType.label,
@@ -52,8 +61,7 @@ const ct = {
   question: sectionType.text,
 } as const
 
-const linkClass =
-  "underline font-semibold transition-colors hover:opacity-80"
+const linkClass = "underline font-semibold transition-colors hover:opacity-80"
 
 const cardStyle = {
   background: IVORY,
@@ -61,7 +69,7 @@ const cardStyle = {
   borderWidth: "1px",
   borderStyle: "solid",
   boxShadow:
-    "0 10px 28px color-mix(in srgb, var(--color-welcome-gold) 12%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)",
+    "0 10px 28px color-mix(in srgb, #E6A39B 12%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)",
 } as const
 
 interface FAQItem {
@@ -90,7 +98,7 @@ function FaqTitle() {
         } as CSSProperties
       }
     >
-      <span className="sr-only">Frequently Asked Questions — everything you need to know</span>
+      <span className="sr-only">A Few Notes — for her debut</span>
       <span
         aria-hidden
         className={`${theSeasons.className} block uppercase leading-[0.9] tracking-[0.04em] min-[400px]:tracking-[0.08em] sm:tracking-[0.12em] md:tracking-[0.14em]`}
@@ -99,7 +107,7 @@ function FaqTitle() {
           color: NAVY,
         }}
       >
-        Frequently Asked Questions
+        A Few Notes
       </span>
       <span
         aria-hidden
@@ -107,20 +115,18 @@ function FaqTitle() {
         style={{
           fontSize: "var(--script-size)",
           color: SCRIPT,
-          textShadow:
-            "0 1px 0 color-mix(in srgb, var(--color-welcome-bg) 95%, white), 0 0 10px color-mix(in srgb, var(--color-welcome-bg) 65%, white)",
         }}
       >
-        everything you need to know
+        for her debut
       </span>
     </h2>
   )
 }
 
 function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
-  const rsvpPhone = siteConfig.details.rsvp.phone.trim()
-  const showRsvpPhone =
-    rsvpPhone.length > 0 && !/to be announced/i.test(rsvpPhone)
+  const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
+  const venueName = siteConfig.wedding.venue || "Smallville"
+  const attireTheme = siteConfig.dressCode.theme || "Enchanted FairyTale"
 
   return [
     {
@@ -139,70 +145,58 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
           >
             guest list
           </a>{" "}
-          on this invitation: search for your name and confirm your attendance.
+          on this invitation: search for your name and confirm if you will be at {debutName}&apos;s debut.
           {"\n\n"}
-          Please respond by {siteConfig.details.rsvp.deadline.replace(/\.\s*$/, "")}.
-          {showRsvpPhone
-            ? `\n\nIf you have questions, please contact ${siteConfig.details.rsvp.coordinator} at ${rsvpPhone}.`
-            : `\n\nIf you have questions, please contact ${siteConfig.details.rsvp.coordinator}.`}
+          Kindly respond by {siteConfig.details.rsvp.deadline.replace(/\.\s*$/, "")}.
         </>
       ),
     },
     {
-      question: 'Do we really need to RSVP? We already said "Yes" to the couple.',
+      question: "Do I still need to RSVP if I already said yes?",
       answer:
-        "Yes, please. We will be needing your formal RSVP to consolidate guest details and finalize the headcount for catering and seating purposes.",
+        "Yes, please. A formal RSVP helps the family finalize the headcount for catering and seating for her debut.",
     },
     {
-      question: "May we choose our own seats at the reception?",
+      question: "May I bring a plus one or my children?",
       answer:
-        "We kindly ask that you take the place reserved for you. Each seat has been arranged with care so everyone may be comfortably seated with those we hoped you would share the evening with.",
+        "This celebration is strictly by invitation. Please come only with the names listed on your invitation. If your child is included, they are warmly welcome — RSVP with the correct number in your party.",
     },
     {
-      question: 'Can I bring a "Plus One" to the event?',
-      answer:
-        "As much as we would love to accommodate all our friends and family, we have a limited number of guests. Please understand that this event is strictly by invitation only.",
+      question: `What should I wear?`,
+      answer: (
+        <>
+          Kindly dress in the spirit of her {attireTheme} debut. Ladies: a floor-length gown in peach, yellow, pink,
+          lavender, or light blue. Gentlemen: a black formal suit.
+          {"\n\n"}
+          See the{" "}
+          <a
+            href="#details"
+            className={linkClass}
+            style={{ color: GOLD }}
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById("details")?.scrollIntoView({ behavior: "smooth" })
+            }}
+          >
+            attire guide
+          </a>{" "}
+          for the full look.
+        </>
+      ),
     },
     {
-      question: "Can I bring my child to the event?",
-      answer:
-        "If your invitation includes your child or children, they are warmly welcome to celebrate with us. Please RSVP with the correct number of guests in your party so we can prepare accordingly.",
+      question: `Is there parking at ${venueName}?`,
+      answer: `Yes. Parking is available at ${venueName}. Please arrive a little early so you have time to park comfortably and be seated for her program.`,
     },
     {
-      question:
-        'I said "No" to the RSVP but I had a change of plans—I can attend now! What should I do?',
+      question: "May I take photos during the program?",
       answer:
-        "Please check with us first as we have a strict guest list. If seats become available, we will let you know as soon as possible. Please do not attend unannounced, as we may not have any available seats for you.",
+        "Please keep phones away during the program so every moment of her eighteenth may be captured with care. Photos and well-wishes are most welcome after.",
     },
     {
-      question: "What if I RSVP'd but cannot attend?",
+      question: "What if my plans change?",
       answer:
-        "We would love to have you at our wedding, but we understand that there are circumstances beyond our control. However, please let us know as soon as possible so we can reallocate your seat/s.",
-    },
-    {
-      question: "Is there parking available?",
-      answer:
-        "Yes, parking is available at both the ceremony and reception venues. Please arrive a little early so you have time to park comfortably.",
-    },
-    {
-      question: "Can I take photos or videos during the reception?",
-      answer:
-        "Yes. We would love for you to capture the joy throughout the reception. We prepared this celebration wholeheartedly and we want everyone to enjoy it fully.",
-    },
-    {
-      question: "When would it be most thoughtful to take our leave?",
-      answer:
-        "It would mean so much if you could stay with us through the end of the program. We have prepared the evening with love, and we hope you will laugh, take photos, and celebrate until the night draws to a close.",
-    },
-    {
-      question: "What if I have dietary restrictions or allergies?",
-      answer:
-        "Please let us know about any dietary restrictions or allergies when you RSVP. We want to ensure everyone can enjoy the celebration comfortably.",
-    },
-    {
-      question: "How can I help the couple have a great time during their wedding?",
-      answer:
-        "• Pray with us for favorable weather and the continuous blessings of our Lord as we enter this new chapter of our lives as husband and wife.\n\n• RSVP as soon as your schedule is cleared.\n\n• Dress according to the attire guide and color palette.\n\n• Arrive on time.\n\n• Follow the seating arrangement at the reception.\n\n• Stay until the end of the program.\n\n• Join the activities and enjoy!",
+        "Please let the family know as soon as you can so a seat may be reallocated. If you earlier declined and can now attend, check first — this evening is by invitation, and we may not have an extra place.",
     },
   ]
 }
@@ -247,11 +241,10 @@ export function FAQ() {
         id="faq"
         className="relative z-10 overflow-hidden pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14"
       >
-        {/* Corner decorations */}
         <div className="pointer-events-none absolute left-0 top-0 z-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/decoration/deco /left-to  p-corner.png"
+            src="/decoration/deco/top-left-corner.png"
             alt=""
             aria-hidden="true"
             className={CORNER_DECO_CLASS}
@@ -293,7 +286,7 @@ export function FAQ() {
             className={`${cinzel.className} mx-auto mt-4 max-w-[20rem] px-2 text-[0.6875rem] font-semibold leading-snug tracking-[0.12em] min-[400px]:max-w-none min-[400px]:text-[0.75rem] min-[400px]:tracking-[0.16em] sm:mt-6 sm:text-[0.9375rem] sm:tracking-[0.2em] md:text-base md:tracking-[0.22em]`}
             style={{ color: GOLD }}
           >
-            A Few Notes
+            Kindly Note
           </p>
           <div className="mx-auto mt-3 sm:mt-4 md:mt-5">
             <FaqTitle />
@@ -302,7 +295,7 @@ export function FAQ() {
             className={`font-goudy-italic mx-auto mt-4 max-w-xl px-2 sm:mt-5 md:mt-6 ${ct.bodyLg}`}
             style={{ color: BODY }}
           >
-            Helpful notes so you can simply arrive, celebrate, and enjoy this new chapter with us.
+            A handful of notes so you can arrive, celebrate, and enjoy her eighteenth with her.
           </p>
           <div className="mt-4 flex items-center justify-center sm:mt-5">
             <span className="h-px w-16 sm:w-24 md:w-32" style={goldDividerStyle} />
@@ -325,10 +318,10 @@ export function FAQ() {
                     style={{
                       borderColor: isOpen ? GOLD_BORDER : GOLD_BORDER_SOFT,
                       backgroundColor: isOpen
-                        ? "color-mix(in srgb, var(--color-welcome-gold) 10%, #fffaf4)"
-                        : "color-mix(in srgb, var(--color-welcome-gold) 4%, #fffaf4)",
+                        ? "color-mix(in srgb, #E6A39B 10%, #FDECE6)"
+                        : "color-mix(in srgb, #E6A39B 4%, #FDECE6)",
                       boxShadow: isOpen
-                        ? "0 8px 20px color-mix(in srgb, var(--color-welcome-gold) 14%, transparent)"
+                        ? "0 8px 20px color-mix(in srgb, #E6A39B 14%, transparent)"
                         : "none",
                     }}
                   >

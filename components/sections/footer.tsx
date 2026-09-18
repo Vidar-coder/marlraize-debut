@@ -6,7 +6,6 @@ import localFont from "next/font/local"
 import { Instagram, Twitter, Facebook, Music2 } from "lucide-react"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { sectionType } from "@/lib/section-typography"
-import { sectionBackground } from "@/lib/section-background"
 import { Cinzel } from "next/font/google"
 import Image from "next/image"
 
@@ -27,20 +26,31 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const SAGE = "#A5B29A"
+
 const palette = {
-  body: "var(--color-welcome-text)",
-  heading: "var(--color-welcome-navy)",
-  label: "var(--color-welcome-heading)",
-  accent: "var(--color-welcome-green)",
+  body: COCOA,
+  heading: COCOA,
+  label: ROSE,
+  accent: ROSE,
 } as const
 
 const dividerLineStyle = {
-  background:
-    "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent), transparent)",
+  background: "linear-gradient(to right, transparent, #E6A39B, transparent)",
 } as const
 
 const CORNER_DECO_CLASS =
   "block h-auto w-auto max-w-[120px] sm:max-w-[180px] md:max-w-[260px] lg:max-w-[320px] xl:max-w-[380px] select-none"
+
+const sectionBackground = `
+  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, #F4CFC8 42%, transparent) 0%, transparent 55%),
+  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${SAGE} 14%, transparent) 0%, transparent 58%),
+  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${ROSE} 16%, transparent) 0%, transparent 55%),
+  linear-gradient(180deg, ${IVORY} 0%, #FCE7E1 48%, ${IVORY} 100%)
+`.trim()
 
 const ct = {
   label: sectionType.label,
@@ -51,59 +61,40 @@ const ct = {
 } as const
 
 const cardStyle = {
-  background: "var(--color-welcome-bg)",
+  background: IVORY,
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+  borderColor: "color-mix(in srgb, #E6A39B 38%, transparent)",
   boxShadow:
-    "0 8px 28px color-mix(in srgb, var(--color-motif-deep) 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+    "0 10px 28px color-mix(in srgb, #E6A39B 12%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)",
 } as const
 
 const socialLinkStyle = {
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "color-mix(in srgb, var(--color-motif-deep) 18%, transparent)",
-  backgroundColor: "var(--color-welcome-bg-soft)",
-  color: "var(--color-welcome-green)",
-  boxShadow: "0 4px 12px color-mix(in srgb, var(--color-motif-deep) 10%, transparent)",
+  borderColor: "color-mix(in srgb, #E6A39B 38%, transparent)",
+  backgroundColor: `color-mix(in srgb, ${IVORY} 82%, ${ROSE})`,
+  color: ROSE,
+  boxShadow: "0 4px 12px color-mix(in srgb, #E6A39B 12%, transparent)",
 } as const
 
 const FOOTER_QUOTES = [
-  `"I have found the one whom my soul loves." – Song of Solomon 3:4`,
-  "Welcome to our wedding website! We've found a love that's a true blessing, and we give thanks to God for writing the beautiful story of our journey together.",
-  "Thank you for your love, prayers, and support. We can't wait to celebrate this joyful day together!",
+  `"She is clothed with strength and dignity, and she laughs without fear of the future." – Proverbs 31:25`,
+  "Welcome to her debut. This evening is a blessing, and we give thanks for every guest who walks with her into eighteen.",
+  "Thank you for your love, prayers, and presence. We can't wait to celebrate her eighteenth with you.",
 ] as const
 
 const LONGEST_FOOTER_QUOTE = FOOTER_QUOTES.reduce((longest, quote) =>
   quote.length > longest.length ? quote : longest
 )
 
-const toTitleCase = (str: string) =>
-  str
-    .toLowerCase()
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ")
-
-function FooterCoupleNames({ groom, bride }: { groom: string; bride: string }) {
+function FooterDebutName({ name }: { name: string }) {
   return (
     <h2
       className={`${cinzel.className} mx-auto whitespace-nowrap text-center ${sectionType.subheader} font-semibold tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.18em]`}
-      style={{ color: "var(--color-welcome-navy)" }}
+      style={{ color: COCOA }}
     >
-      {groom}
-      <span
-        className={`${aboveTheBeyond.className} mx-2 inline-block normal-case tracking-normal sm:mx-2.5`}
-        style={{
-          fontSize: "1.35em",
-          color: "var(--color-welcome-green)",
-          verticalAlign: "middle",
-        }}
-        aria-hidden
-      >
-        &
-      </span>
-      {bride}
+      {name}
     </h2>
   )
 }
@@ -154,11 +145,9 @@ function DetailRow({
 export function Footer() {
   const siteConfig = useSiteConfig()
   const year = new Date().getFullYear()
-  const ceremonyDate = siteConfig.ceremony.date
-
-  const groomName = siteConfig.couple.groomNickname || siteConfig.couple.groom
-  const brideName = siteConfig.couple.brideNickname || siteConfig.couple.bride
-  const coupleDisplayName = `${groomName} & ${brideName}`
+  const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
+  const debutDate = siteConfig.wedding.date
+  const debutVenue = siteConfig.wedding.venue || "Smallville"
 
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
   const [displayedText, setDisplayedText] = useState("")
@@ -209,8 +198,8 @@ export function Footer() {
     () =>
       [
         { label: "Home", href: "#home" },
-        { label: "Events", href: "#details" },
-        { label: "Stay", href: "#hotel" },
+        { label: "Details", href: "#details" },
+        { label: "Gallery", href: "#gallery" },
         { label: "RSVP", href: "#guest-list" },
         { label: "Messages", href: "#messages" },
       ] as const,
@@ -272,7 +261,7 @@ export function Footer() {
             <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72">
               <Image
                 src={siteConfig.couple.monogram}
-                alt={`${coupleDisplayName} monogram`}
+                alt={`${debutName} monogram`}
                 fill
                 className="object-contain"
               />
@@ -280,13 +269,13 @@ export function Footer() {
           </motion.div>
 
           <div className="mt-4 max-w-md text-center sm:mt-5 md:mt-6">
-            {/* <FooterCoupleNames groom={groomName} bride={brideName} /> */}
-            {/* <p
+            <FooterDebutName name={debutName} />
+            <p
               className={`font-goudy-italic mt-2 sm:mt-3 ${sectionType.text}`}
-              style={{ color: "var(--color-welcome-text)" }}
+              style={{ color: COCOA }}
             >
-              {ceremonyDate}
-            </p> */}
+              {debutDate}
+            </p>
           </div>
 
           <div className="flex items-center justify-center pt-3 sm:pt-4">
@@ -301,18 +290,18 @@ export function Footer() {
             initial="initial"
             animate="animate"
           >
-            {/* Couple info + quote */}
+            {/* Debut info + quote */}
             <motion.div className="lg:col-span-2 min-w-0" variants={fadeInUp}>
               <div className="mb-5 sm:mb-6">
                 <h3
                   className={`${cinzel.className} ${ct.title} font-semibold leading-tight mb-4`}
                   style={{ color: palette.heading }}
                 >
-                  {coupleDisplayName}
+                  {debutName}
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
-                  <DetailRow label="Wedding Date" value={ceremonyDate} />
-                  {/* <DetailRow label="Venue" value={toTitleCase(ceremonyVenue)} /> */}
+                  <DetailRow label="Debut Date" value={debutDate} />
+                  <DetailRow label="Venue" value={debutVenue} />
                 </div>
               </div>
 
@@ -321,7 +310,7 @@ export function Footer() {
                   className={`${cinzel.className} ${ct.label} uppercase tracking-[0.14em] font-semibold mb-3`}
                   style={{ color: palette.label }}
                 >
-                  A Note From Us
+                  A Note for Her Evening
                 </p>
                 <blockquote className={`relative font-goudy-italic ${ct.bodyLg}`}>
                   <span className="invisible block select-none" aria-hidden="true">
@@ -335,7 +324,7 @@ export function Footer() {
                     &ldquo;{displayedText}
                     <span
                       className="ml-1 inline-block h-4 w-0.5 animate-pulse align-middle sm:h-5"
-                      style={{ backgroundColor: "var(--color-welcome-green)" }}
+                      style={{ backgroundColor: ROSE }}
                     />
                     &rdquo;
                   </span>
@@ -364,7 +353,7 @@ export function Footer() {
                 <div className="space-y-2">
                   <DetailRow label="Please respond by" value={siteConfig.details.rsvp.deadline} />
                   <p className={`font-goudy-italic ${ct.body} opacity-90`} style={{ color: palette.body }}>
-                    Please confirm your attendance by this date.
+                    Please confirm if you will be at her debut.
                   </p>
                 </div>
               </FooterCard>
@@ -379,9 +368,9 @@ export function Footer() {
                 >
                   <span
                     className="h-6 w-1.5 flex-shrink-0 rounded-full sm:h-7"
-                    style={{ backgroundColor: "var(--color-welcome-green)" }}
+                    style={{ backgroundColor: ROSE }}
                   />
-                  Follow Us
+                  Follow Along
                 </h4>
                 <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
                   {(
@@ -434,20 +423,20 @@ export function Footer() {
           <motion.div
             className="pt-6 sm:pt-8 border-t"
             style={{
-              borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+              borderColor: "color-mix(in srgb, #E6A39B 38%, transparent)",
             }}
             variants={fadeInUp}
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
               <div className="text-center md:text-left min-w-0">
                 <p className={`font-goudy-italic ${ct.body}`} style={{ color: palette.body }}>
-                  © {year} {coupleDisplayName} — crafted with love, prayers, and gratitude.
+                  © {year} {debutName} — crafted with love and gratitude for her eighteenth.
                 </p>
                 <p
                   className={`font-goudy-italic ${ct.body} mt-1 opacity-90`}
                   style={{ color: palette.body }}
                 >
-                  This celebration site was designed to share our story and joy with you.
+                  This invitation was designed to share her debut with you.
                 </p>
               </div>
               <div className="min-w-0 space-y-1 text-center md:text-right">

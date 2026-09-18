@@ -11,12 +11,14 @@ const cinzel = Cinzel({
   weight: ["400", "600", "700"],
 })
 
-const IVORY = "#fffaf4"
-const GOLD = "var(--color-welcome-gold)"
-const NAVY = "var(--color-welcome-navy)"
-const BODY = "var(--color-welcome-text)"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const GOLD = ROSE
+const NAVY = COCOA
+const BODY = COCOA
 const NAV_GOLD =
-  "linear-gradient(180deg, #E8D5A3 0%, #CDB072 52%, #C4A265 100%)"
+  "linear-gradient(180deg, #E6A39B 0%, #C89E8C 52%, #976C58 100%)"
 
 const palette = {
   body: BODY,
@@ -29,12 +31,12 @@ const messageCardStyle = {
   background: IVORY,
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)",
+  borderColor: "color-mix(in srgb, #E6A39B 38%, transparent)",
   boxShadow:
-    "0 10px 28px color-mix(in srgb, var(--color-welcome-gold) 12%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)",
+    "0 10px 28px color-mix(in srgb, #E6A39B 12%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)",
 } as const
 
-const skeletonBg = "color-mix(in srgb, var(--color-welcome-gold) 22%, white)"
+const skeletonBg = "color-mix(in srgb, #E6A39B 22%, white)"
 
 interface Message {
   timestamp: string
@@ -100,34 +102,25 @@ export default function MessageWallDisplay({ messages, loading, freshKey = null 
 
   if (messages.length === 0) {
     return (
-      <div
-        className="rounded-[1.85rem] border px-4 py-8 text-center sm:py-12 md:py-16"
-        style={messageCardStyle}
-      >
+      <div className="px-4 py-6 text-center sm:py-8">
         <h3
           className={`${cinzel.className} mb-2 font-semibold uppercase tracking-[0.16em] sm:mb-3 ${sectionType.subheader}`}
-          style={{ color: NAVY }}
+          style={{ color: "#FFFFFF", textShadow: "0 1px 8px rgb(42 34 28 / 40%)" }}
         >
           No messages yet
         </h3>
         <p
-          className={`font-goudy-italic mx-auto mb-5 max-w-md sm:mb-6 ${sectionType.textRelaxed}`}
-          style={{ color: BODY }}
+          className={`font-goudy-italic mx-auto mb-3 max-w-md sm:mb-4 ${sectionType.textRelaxed}`}
+          style={{ color: "#FFFFFF", textShadow: "0 1px 8px rgb(42 34 28 / 40%)" }}
         >
-          Be the first to leave a note for the happy couple.
+          Be the first to leave a note for the debutante.
         </p>
-        <div className="flex justify-center">
-          <span
-            className={`${cinzel.className} ${sectionType.label} rounded-full border px-4 py-2 font-semibold uppercase tracking-[0.16em]`}
-            style={{
-              color: GOLD,
-              backgroundColor: IVORY,
-              borderColor: "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)",
-            }}
-          >
-            Your message will appear here
-          </span>
-        </div>
+        <p
+          className={`${cinzel.className} ${sectionType.label} font-semibold uppercase tracking-[0.16em]`}
+          style={{ color: "#FFFFFF", textShadow: "0 1px 8px rgb(42 34 28 / 40%)" }}
+        >
+          Your message will appear here
+        </p>
       </div>
     )
   }
@@ -146,19 +139,19 @@ export default function MessageWallDisplay({ messages, loading, freshKey = null 
           style={{
             ...messageCardStyle,
             borderColor: isNew
-              ? "color-mix(in srgb, var(--color-welcome-gold) 70%, transparent)"
+              ? "color-mix(in srgb, #E6A39B 70%, transparent)"
               : messageCardStyle.borderColor,
             boxShadow: isNew
-              ? "0 12px 28px color-mix(in srgb, var(--color-welcome-gold) 28%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)"
+              ? "0 12px 28px color-mix(in srgb, #E6A39B 28%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)"
               : messageCardStyle.boxShadow,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.boxShadow =
-              "0 14px 32px color-mix(in srgb, var(--color-welcome-gold) 22%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)"
+              "0 14px 32px color-mix(in srgb, #E6A39B 22%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)"
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.boxShadow = isNew
-              ? "0 12px 28px color-mix(in srgb, var(--color-welcome-gold) 28%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)"
+              ? "0 12px 28px color-mix(in srgb, #E6A39B 28%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)"
               : (messageCardStyle.boxShadow as string)
           }}
         >
@@ -174,7 +167,7 @@ export default function MessageWallDisplay({ messages, loading, freshKey = null 
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-md transition-transform duration-300 group-hover:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
                   style={{
                     background: NAV_GOLD,
-                    boxShadow: "0 6px 14px color-mix(in srgb, var(--color-welcome-gold) 28%, transparent)",
+                    boxShadow: "0 6px 14px color-mix(in srgb, #E6A39B 28%, transparent)",
                   }}
                 >
                   <span className={`${cinzel.className} ${sectionType.label} font-semibold`} style={{ color: IVORY }}>

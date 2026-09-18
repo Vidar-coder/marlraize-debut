@@ -12,10 +12,14 @@ const theSeasons = localFont({
   variable: "--font-the-seasons",
 })
 
-const lightBg = "var(--color-welcome-bg)"
-const darkBg = "var(--color-welcome-green)"
+const IVORY = "#FDECE6"
+const COCOA = "#976C58"
+const lightBg = IVORY
+const darkBg = COCOA
+
 interface StorySectionProps {
   imageSrc: string
+  alt?: string
   title?: string
   text: React.ReactNode
   layout: "image-left" | "image-right"
@@ -26,6 +30,7 @@ interface StorySectionProps {
 
 export const StorySection: React.FC<StorySectionProps> = ({
   imageSrc,
+  alt = "Debut moment",
   title,
   text,
   layout,
@@ -53,15 +58,15 @@ export const StorySection: React.FC<StorySectionProps> = ({
 
   const imageFrameStyle = isDark
     ? {
-        background: "color-mix(in srgb, var(--color-welcome-bg-soft) 12%, var(--color-welcome-bg-soft))",
-        boxShadow:
-          "0 10px 28px color-mix(in srgb, var(--color-motif-accent) 35%, transparent)",
+        background: COCOA,
+        border: "1px solid color-mix(in srgb, #FDECE6 22%, transparent)",
+        boxShadow: "0 10px 28px color-mix(in srgb, #976C58 28%, transparent)",
       }
     : {
-        background: "var(--color-welcome-bg-soft)",
-        border: "1px solid color-mix(in srgb, var(--color-motif-deep) 10%, transparent)",
+        background: IVORY,
+        border: "1px solid color-mix(in srgb, #976C58 10%, transparent)",
         boxShadow:
-          "0 8px 24px color-mix(in srgb, var(--color-motif-deep) 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+          "0 8px 24px color-mix(in srgb, #976C58 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
       }
 
   const rotation = layout === "image-left" ? "rotate-1 md:rotate-2" : "-rotate-1 md:-rotate-2"
@@ -97,7 +102,7 @@ export const StorySection: React.FC<StorySectionProps> = ({
                 <div className="group relative aspect-[3/4] w-full overflow-hidden">
                   <Image
                     src={imageSrc}
-                    alt="Story Moment"
+                    alt={alt}
                     fill
                     sizes="(max-width: 768px) 45vw, (max-width: 1024px) 40vw, 33vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -114,14 +119,14 @@ export const StorySection: React.FC<StorySectionProps> = ({
 
           <div
             className="w-[55%] @container/story md:w-5/12"
-            style={{ color: isDark ? lightBg : "var(--color-welcome-text)" }}
+            style={{ color: isDark ? IVORY : COCOA }}
           >
             {title && (
               <h2
                 className={`${theSeasons.className} mb-3 uppercase leading-tight tracking-[0.08em] transition-all delay-500 duration-1000 sm:mb-4 sm:tracking-[0.1em] md:mb-6 md:tracking-[0.12em] ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
                 style={{
                   fontSize: storyChapterTitleSize,
-                  color: isDark ? lightBg : "var(--color-welcome-navy)",
+                  color: isDark ? IVORY : COCOA,
                 }}
               >
                 {title}

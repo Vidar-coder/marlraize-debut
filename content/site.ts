@@ -31,9 +31,9 @@ export const siteConfig = {
   wedding: {
     date: "October 10, 2026",
     time: "5:00 PM",
-    venue: "Smallville",
+    venue: "Smallville 21 Hotel",
     tagline: "are getting married!!!!!",
-    theme: "Whimsical Spring Minimalist",
+    theme: "Enchanted FairyTale",
     motif: "#FFCA8B, #FFB383, #F6CEC8, #E99997, #C8C29E",
   },
   proposal: {
@@ -76,27 +76,27 @@ export const siteConfig = {
     // }
   },
   ceremony: {
-    location: "St. Benedict Parish",
-    venue: "Ayala Westgrove Heights, South Blvd, Silang, 4118 Cavite, Philippines",
-    map: "https://maps.app.goo.gl/yRMLmsfaZwjEWzy36",
+    location: "Smallville 21 Hotel",
+    venue: "Smallville Complex G. T, Glicerio Pison Ave, Mandurriao, Iloilo City",
+    map: "https://maps.app.goo.gl/Z1LCEXWvzHVdGjgF9",
     date: "November 19, 2026",
     day: "Thursday",
     time: "9:30 AM",
     entourageTime: "8:00 AM",
     guestsTime: "9:00 AM",
-    image: ["/Details/ceremony (1).jpg", "/Details/ceremony (2).jpg","/Details/ceremony3.webp"],
+    image: ["/Details/venue.png", "/Details/venue2.png"],
   },
   reception: {
-    location: "Hillbarn Tagaytay",
-    venue: "Hillbarn Tagaytay, Daang Luma, Tagaytay City, 4120 Cavite",
-    map: "https://maps.app.goo.gl/5ydREXRam4A1zcyT9",
+    location: "Smallville 21 Hotel",
+    venue: "Smallville Complex G. T, Glicerio Pison Ave, Mandurriao, Iloilo City",
+    map: "https://maps.app.goo.gl/Z1LCEXWvzHVdGjgF9",
     date: "November 19, 2026",
     day: "Thursday",
     time: "12:00 noon",
-    image: ["/Details/reception.png", "/Details/reception2.png","/Details/reception3.png","/Details/reception4.png","/Details/reception5.png", "/Details/reception6.png"],
+    image: ["/Details/venue.png", "/Details/venue2.png"],
   },
   dressCode: {
-    theme: "Whimsical Spring Minimalist",
+    theme: "Enchanted FairyTale",
     sponsors: {
       title: "Sponsors",
       ninang: {
@@ -130,15 +130,15 @@ export const siteConfig = {
     guests: {
       title: "Guests",
       label: "Guests",
-      description: "Casual attire: Whimsical Spring.",
+      description: "Enchanted FairyTale formal attire.",
       image: "/Details/Guest.png",
       palette: ["#FFCA8B", "#FFB383", "#F6CEC8", "#E99997", "#C8C29E"],
     },
     paletteNote:
-      "Our theme is Whimsical Spring Minimalist. Entourage: women, a flowy spring sage green dress, strictly floor length; gentlemen, a black and white suit, a white and gray suit, or sage green long sleeves with gray or brown pants — strictly no rubber shoes. Guests: casual attire, Whimsical Spring.",
+      "Our theme is Enchanted FairyTale. Ladies: a floor-length gown in peach, yellow, pink, lavender, or light blue. Gentlemen: a black formal suit.",
     closing:
-      "Thank you for helping us bring our wedding vision to life. We can't wait to celebrate with you!",
-    note: "We kindly request our guests to dress in attire following our Whimsical Spring Minimalist palette.",
+      "Thank you for helping bring her debut vision to life. We can't wait to celebrate with you!",
+    note: "We kindly request our guests to dress in attire following our Enchanted FairyTale palette.",
   },
   narratives: {
     ourStory: `Once upon a signature…
@@ -180,8 +180,9 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     googleDriveLink:
       "https://drive.google.com/drive/folders/1XWGl7DCog_VTfCOCMz4Sp-7LXTD27ak1?usp=sharing",
     albumQR: "/QR/AlbumQR.png",
-    hashtag: ["#Jonna&RickyInTime"],
-    instructions: "Please scan this QR Code and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
+    hashtag: ["#MarlriazeAtEighteen"],
+    instructions:
+      "Kindly scan this QR code and upload the photos and videos from her debut. She would be delighted to see your snaps, too.",
   },
   accommodation: {
     coordinator: {

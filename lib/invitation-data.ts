@@ -5,7 +5,6 @@ const inflight = new Map<string, Promise<unknown[]>>()
 
 export const INVITATION_DATA_URLS = [
   "/api/guests",
-  "/api/entourage",
   "/api/principal-sponsor",
 ] as const
 

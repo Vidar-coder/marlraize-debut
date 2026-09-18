@@ -251,13 +251,12 @@ export function Countdown() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative"
         >
-          <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem] opacity-90">
+          <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem]">
             <Image
               src={siteConfig.couple.monogram}
               alt={`${debutNickname || debut} Monogram`}
               fill
-              className="object-contain drop-shadow-[0_4px_18px_rgba(151,108,88,0.4)]"
-              style={{ filter: "brightness(0) invert(1)" }}
+              className="object-contain drop-shadow-[0_8px_24px_rgba(151,108,88,0.28)]"
               priority={false}
             />
           </div>

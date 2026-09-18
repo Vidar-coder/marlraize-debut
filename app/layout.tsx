@@ -9,10 +9,10 @@ import { ClientLayout } from "@/components/client-layout"
 import { LOADING_BG_PHOTOS } from "@/lib/loading-bg-photos"
 import { anastasiaScript } from "@/lib/fonts"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ricky-and-jonna.weddinginvitationrsvp.com/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://marlraize-debut.vercel.app/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
-  const desktopHero = "/Details/linkPreview.png"
-const mobileHero = "/Details/linkPreview.png"
+  const desktopHero = "/Details/LinkPreview.png"
+const mobileHero = "/Details/LinkPreview.png"
 const eventImageUrl = `${canonicalUrl}${desktopHero}`
 const OG_IMAGE_FALLBACK = `${canonicalUrl}${desktopHero}`
 
@@ -223,8 +223,8 @@ export default function RootLayout({
         ))}
         <link rel="preload" as="image" href={mobileHero} media="(max-width: 767px)" />
         <link rel="preload" as="image" href={desktopHero} media="(min-width: 768px)" />
-        <link rel="preload" as="image" href="/Details/ceremony.png" />
-        <link rel="preload" as="image" href="/Details/reception.png" />
+        <link rel="preload" as="image" href="/Details/venue.png" />
+        <link rel="preload" as="image" href="/Details/venue2.png" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body
