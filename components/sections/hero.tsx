@@ -64,26 +64,6 @@ function pad2(n: number) {
   return String(n).padStart(2, "0")
 }
 
-function formatCeremonyTimePhrase(raw: string) {
-  const match = raw.trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)?/i)
-  if (!match) return raw.toUpperCase()
-
-  let hour24 = Number(match[1])
-  const minutes = match[2] ?? "00"
-  const meridiem = (match[3] || "").toUpperCase()
-
-  if (meridiem === "PM" && hour24 !== 12) hour24 += 12
-  if (meridiem === "AM" && hour24 === 12) hour24 = 0
-
-  const period =
-    hour24 >= 17 ? "IN THE EVENING" : hour24 >= 12 ? "IN THE AFTERNOON" : "IN THE MORNING"
-
-  let displayHour = hour24 % 12
-  if (displayHour === 0) displayHour = 12
-
-  return `${displayHour}:${minutes} ${period}`
-}
-
 function useCeremonyCountdown() {
   const siteConfig = useSiteConfig()
 
@@ -317,9 +297,6 @@ export function Hero() {
     ? `${parsedDate.month} ${parsedDate.day}, ${parsedDate.year}`
     : `${pad2(weddingDate.getMonth() + 1)}.${pad2(weddingDate.getDate())}.${parsedDate.year}`
 
-  const ceremonyTimePhrase = formatCeremonyTimePhrase(
-    siteConfig.ceremony.time ?? siteConfig.wedding.time,
-  )
   const ceremonyName =
     siteConfig.ceremony.location || siteConfig.wedding.venue
 
@@ -422,7 +399,7 @@ export function Hero() {
           style={{ textShadow: "0 1px 10px rgb(151 108 88 / 40%)" }}
           {...fadeUp(0.36)}
         >
-          {ceremonyName} · {ceremonyTimePhrase}
+          {ceremonyName}
         </motion.p>
       </div>
 
