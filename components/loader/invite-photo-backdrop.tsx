@@ -8,11 +8,10 @@ import './loading-screen.css';
 
 export { LOADING_BG_PHOTOS };
 
-const MOBILE_BG_PHOTO_COUNT = 60;
-const DESKTOP_BG_PHOTO_COUNT = 17;
+const MOBILE_BG_PHOTO_COUNT = 11;
+const DESKTOP_BG_PHOTO_COUNT = 2;
 const MARQUEE_SAMPLE_SIZE = 24;
 
-// public/mobile-background/new-debut (1).webp
 export const MOBILE_BG_PHOTOS = Array.from(
   { length: MOBILE_BG_PHOTO_COUNT },
   (_, index) => encodeURI(`/mobile-background/new-debut (${index + 1}).webp`),
@@ -128,6 +127,7 @@ export function InvitePhotoBackdrop({ className = '' }: { className?: string }) 
   return (
     <div className={`invite-photo-backdrop ${className}`.trim()} aria-hidden="true">
       <PhotoMarquee photos={MOBILE_BG_PHOTOS} copies={copies} variant="mobile" />
+      <PhotoMarquee photos={DESKTOP_BG_PHOTOS} copies={copies} variant="desktop" />
       <div className="loading-screen__backdrop-veil" />
     </div>
   );
