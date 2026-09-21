@@ -12,14 +12,15 @@ const MOBILE_BG_PHOTO_COUNT = 60;
 const DESKTOP_BG_PHOTO_COUNT = 17;
 const MARQUEE_SAMPLE_SIZE = 24;
 
+// public/mobile-background/new-debut (1).webp
 export const MOBILE_BG_PHOTOS = Array.from(
   { length: MOBILE_BG_PHOTO_COUNT },
-  (_, index) => encodeURI(`/mobile-background/debut (${index + 1}).webp`),
+  (_, index) => encodeURI(`/mobile-background/new-debut (${index + 1}).webp`),
 );
 
 export const DESKTOP_BG_PHOTOS = Array.from(
   { length: DESKTOP_BG_PHOTO_COUNT },
-  (_, index) => encodeURI(`/desktop-background/debut (${index + 1}).webp`),
+  (_, index) => encodeURI(`/desktop-background/new-debut (${index + 1}).webp`),
 );
 
 function pickRandomPhotos(photos: readonly string[], count: number) {
