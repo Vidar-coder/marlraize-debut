@@ -336,7 +336,7 @@ export function SnapShare() {
             <div className="grid w-full min-w-0 grid-cols-2 gap-2 sm:gap-3">
               <div className="relative aspect-square overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: ROSE_BORDER_SOFT }}>
                 <Image
-                  src="/envelope/box (4).jpg"
+                  src="/envelope/box (1).jpeg"
                   alt="Debut moment 1"
                   fill
                   className="object-cover"
@@ -345,7 +345,7 @@ export function SnapShare() {
               </div>
               <div className="relative aspect-square overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: ROSE_BORDER_SOFT }}>
                 <Image
-                  src="/envelope/box (1).jpg"
+                  src="/envelope/box (5).jpeg"
                   alt="Debut moment 2"
                   fill
                   className="object-cover"
@@ -354,7 +354,7 @@ export function SnapShare() {
               </div>
               <div className="relative col-span-2 aspect-[3/2] overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: ROSE_BORDER_SOFT }}>
                 <Image
-                  src="/desktop-background/debut (14).webp"
+                  src="/desktop-background/new-debut (1).webp"
                   alt="Debut moment 3"
                   fill
                   className="object-cover"
