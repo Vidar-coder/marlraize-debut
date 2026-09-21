@@ -106,16 +106,16 @@ function GalleryTitle() {
 }
 
 const galleryItems = [
-  { image: "/mobile-background/debut (1).webp", text: " " },
-  { image: "/mobile-background/debut (2).webp", text: " " },
-  { image: "/mobile-background/debut (3).webp", text: " " },
-  { image: "/mobile-background/debut (4).webp", text: " " },
-  { image: "/mobile-background/debut (5).webp", text: " " },
-  { image: "/mobile-background/debut (6).webp", text: " " },
-  { image: "/mobile-background/debut (7).webp", text: " " },
-  { image: "/mobile-background/debut (8).webp", text: " " },
-  { image: "/mobile-background/debut (9).webp", text: " " },
-  { image: "/mobile-background/debut (10).webp", text: " " },
+  { image: "/mobile-background/new-debut (1).webp", text: " " },
+  { image: "/mobile-background/new-debut (2).webp", text: " " },
+  { image: "/mobile-background/new-debut (3).webp", text: " " },
+  { image: "/mobile-background/new-debut (4).webp", text: " " },
+  { image: "/mobile-background/new-debut (5).webp", text: " " },
+  { image: "/mobile-background/new-debut (6).webp", text: " " },
+  { image: "/mobile-background/new-debut (7).webp", text: " " },
+  { image: "/mobile-background/new-debut (8).webp", text: " " },
+  { image: "/mobile-background/new-debut (9).webp", text: " " },
+  { image: "/mobile-background/new-debut (10).webp", text: " " },
 
 ]
 
@@ -313,7 +313,7 @@ export function Gallery() {
                       }}
                     />
 
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+                    <div className="relative h-[22rem] overflow-hidden rounded-lg">
                       <Image
                         src={item.image}
                         alt={item.text || `Gallery image ${index + 1}`}
@@ -371,7 +371,7 @@ export function Gallery() {
                     }}
                   />
 
-                  <div className="relative aspect-[3/4] md:aspect-square overflow-hidden rounded-xl">
+                  <div className="relative h-[22rem] overflow-hidden rounded-xl md:h-[24rem] lg:h-[26rem]">
                     <Image
                       src={item.image}
                       alt={item.text || `Gallery image ${index + 1}`}

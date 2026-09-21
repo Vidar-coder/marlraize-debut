@@ -27,15 +27,15 @@ interface HeroProps {
 }
 
 const DESKTOP_POLAROID_PHOTOS = [
-  { src: encodeURI('/envelope/box (1).jpg'), side: 'left' as const },
-  { src: encodeURI('/envelope/box (2).jpg'), side: 'center' as const },
-  { src: encodeURI('/envelope/box (3).jpg'), side: 'right' as const },
-  { src: encodeURI('/envelope/box (5).jpg'), side: 'right-inner' as const },
+  { src: encodeURI('/envelope/box (1).jpeg'), side: 'left' as const },
+  { src: encodeURI('/envelope/box (2).jpeg'), side: 'center' as const },
+  { src: encodeURI('/envelope/box (3).jpeg'), side: 'right' as const },
+  { src: encodeURI('/envelope/box (5).jpeg'), side: 'right-inner' as const },
 ];
 
 const MOBILE_ENVELOPE_PHOTOS = [
-  { src: encodeURI('/envelope/box (1).jpg'), side: 'left' as const },
-  { src: encodeURI('/envelope/box (3).jpg'), side: 'right' as const },
+  { src: encodeURI('/envelope/envelope (1).jpeg'), side: 'left' as const },
+  { src: encodeURI('/envelope/envelope (2).jpeg'), side: 'right' as const },
 ] as const;
 
 const DEBUT_MARK = '/Details/debut.png';

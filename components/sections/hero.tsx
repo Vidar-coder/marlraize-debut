@@ -36,19 +36,21 @@ const heroTitleSize = {
 const SLIDE_MS = 5600
 
 const MOBILE_HERO_PHOTOS = [
-  encodeURI("/mobile-background/debut (14).webp"),
-  encodeURI("/mobile-background/debut (17).webp"),
-  encodeURI("/mobile-background/debut (24).webp"),
-  encodeURI("/mobile-background/debut (30).webp"),
-  encodeURI("/mobile-background/debut (4).webp"),
+  encodeURI("/mobile-background/new-debut (1).webp"),
+  encodeURI("/mobile-background/new-debut (3).webp"),
+  encodeURI("/mobile-background/new-debut (5).webp"),
+  encodeURI("/mobile-background/new-debut (8).webp"),
+  encodeURI("/mobile-background/new-debut (9).webp"),
+  encodeURI("/mobile-background/new-debut (10).webp"),
+  encodeURI("/mobile-background/new-debut (11).webp"),
 ]
 
 const DESKTOP_HERO_PHOTOS = [
-  encodeURI("/desktop-background/debut (1).webp"),
-  encodeURI("/desktop-background/debut (2).webp"),
-  encodeURI("/desktop-background/debut (3).webp"),
-  encodeURI("/desktop-background/debut (5).webp"),
-  encodeURI("/desktop-background/debut (4).webp"),
+  encodeURI("/desktop-background/new-debut (1).webp"),
+  encodeURI("/desktop-background/new-debut (2).webp"),
+  encodeURI("/desktop-background/new-debut (1).webp"),
+  encodeURI("/desktop-background/new-debut (2).webp"),
+  encodeURI("/desktop-background/new-debut (1).webp"),
 ]
 
 interface TimeLeft {

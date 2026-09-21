@@ -148,7 +148,7 @@ export function LoveStory() {
         layout="image-left"
         isFirst={true}
         title="To My Family"
-        imageSrc="/mobile-background/debut (12).webp"
+        imageSrc="/mobile-background/new-debut (1).webp"
         alt={`${debutName} with family`}
         text={
           <>
@@ -164,7 +164,7 @@ export function LoveStory() {
       <StorySection
         theme="dark"
         layout="image-right"
-        imageSrc="/mobile-background/debut (17).webp"
+        imageSrc="/mobile-background/new-debut (8).webp"
         alt={`${debutName} with friends`}
         title="To My Friends"
         text={
@@ -181,7 +181,7 @@ export function LoveStory() {
       <StorySection
         theme="light"
         layout="image-left"
-        imageSrc="/mobile-background/debut (24).webp"
+        imageSrc="/mobile-background/new-debut (3).webp"
         alt={`${debutName} with those who guided her`}
         title="To Those Who Guided Me"
         text={
@@ -198,7 +198,7 @@ export function LoveStory() {
       <StorySection
         theme="dark"
         layout="image-right"
-        imageSrc="/mobile-background/debut (30).webp"
+        imageSrc="/mobile-background/new-debut (9).webp"
         alt={`${debutName} honoring her ninongs and ninangs`}
         title="To My Ninongs and Ninangs"
         text={
@@ -215,7 +215,7 @@ export function LoveStory() {
       <StorySection
         theme="light"
         layout="image-left"
-        imageSrc="/mobile-background/debut (20).webp"
+        imageSrc="/mobile-background/new-debut (11).webp"
         alt={`${debutName} thinking of loved ones near and far`}
         title="To Those Near and Far"
         text={
@@ -232,7 +232,7 @@ export function LoveStory() {
       <StorySection
         theme="dark"
         layout="image-right"
-        imageSrc="/mobile-background/debut (35).webp"
+        imageSrc="/mobile-background/new-debut (6).webp"
         alt={`${debutName} grateful for every kindness`}
         title="For Every Kindness"
         text={
@@ -250,7 +250,7 @@ export function LoveStory() {
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/mobile-background/debut (4).webp"
+        imageSrc="/mobile-background/new-debut (7).webp"
         alt={`${debutName} inviting guests to her debut`}
         title="Come Celebrate With Me"
         text={

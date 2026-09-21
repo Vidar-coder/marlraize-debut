@@ -87,7 +87,7 @@ function buildTimelineEvents(siteConfig: SiteConfig): TimelineEvent[] {
 
   return [
     {
-      time: "5:30 PM",
+      time: "5:00 PM",
       title: "Assembly",
       description: "Guests Arrival",
       location: venue,

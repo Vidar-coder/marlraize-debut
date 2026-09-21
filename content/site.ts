@@ -15,16 +15,16 @@ export const siteConfig = {
     backgroundMusic:"/background_music/Enchanted (Taylor Swift Cover) by Joseph William Morgan [Bridgerton Season 4 (Netflix Series)].mp3"
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLScd8BvFRvQPqJIKUhSiaimQ2jjnmb3zqAMoYIRBaj6F1QuSWQ/formResponse",   //done
-    message: "https://script.google.com/macros/s/AKfycbwNbmXV6gdpOI88CqM0heCVNTa_uyQaQw88cXmsB9LtjvYJXXusN-a7sBOg7cTXcGHI/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbzlM2GNw_7ueXpsAozs0kU8OCQ02gehC0GMz4xDl4xs_u7Dd8UmV0Vt_naiGUlUrUER/exec",  //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbwsY9UOcNs3CGb6YqpqWDO2ivmONNAf0771XsOY6claCjovh8dXQjdQ2WHBYbP_cxzt/exec",   //done
-    entourage: "https://script.google.com/macros/s/AKfycbzMq4bf26jpdyjiyQVkLO87uJt1h-wHxjUZYPqS_n1ruMh4Qk78sr5Ze6o_6yggR6LA/exec",  //done
-    sponsors: "https://script.google.com/macros/s/AKfycbzsI8cHgdN0g0zuGP7L2ID1TFy4MnsokySv0HNQYyUlWmtSZX5djwW4ytgbUWNYyNH7/exec",  //done 
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSeaYh_rrEOISitwgsO55nts-oxQQldXDNgmh5Z3Uw-ICFxr1Q/formResponse",   //done
+    message: "https://script.google.com/macros/s/AKfycbwnCgxqJPuhjMjqSdRijfzoI5BMKQoFl7ENdSstWf6W8daFlKUZ611elhbEloeJKbb9/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbz0LSR-gJzvgpAAMKj-f1cob1PBfOcCv1xdnO2pjAEMEYboqEBJSuOQ3V2cXbl9ak34Gg/exec",  //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbxzmHN7CyUHxDcKoN7QMuOhmFrUyK4qJ9PK7V59u7j_bE7_pGg4G7Mb3c8XuI5Y4GoOvA/exec",   //done
+    entourage: "https://script.google.com/macros/s/AKfycbxlIS8hDnCh-LfTe4xHC3uK3FM-QpoOrR8Xb82X2TM4fFiKAlylXUKdkpBp3KsdO5_crQ/exec",  //done
+    sponsors: "https://script.google.com/macros/s/AKfycbwQlJWbJ9TTcyIMJ0qulCJNRhZddoTYJfoFHqwXhtuHWLzB7-b8pHhQcmI1XpIEvIdj1Q/exec",  //done 
     proposalResponses: "https://script.google.com/macros/s/AKfycbwIUDKMoMIHVwbmr6KbgmBtlGRpMGj1Z9maeHSEwsFaXNi0dAH8WYhqbtiAfg_p5D4lgw/exec", // uses entourage script with action: proposal
-    weddingDetails: "https://script.google.com/macros/s/AKfycbz7149AyRaR8Vtxf6gF374syfJMeHGzhEE8Sa6ydkcgHNXcJ7atiQdc7rSt_RTaUlhv/exec",   //done
+    weddingDetails: "https://script.google.com/macros/s/AKfycby4btF7AjwAlZBgtJuT-UiMq2qn7xjhv6p-qZb4pXEcY1Q7J_FdfNKFxLv-Bumbuah_6Q/exec",   //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/16iVp_hSJzdBPzGbuIPK2CeeiW3nde1rd2jk4oJLxZQw/edit?usp=sharing",
+    googleShare: "https://docs.google.com/spreadsheets/d/18fYvffWYDluHqEXchTuzD4pxUEcxeml8Ev77a1Z4-ok/edit?usp=sharing",
     videoMessageForm:
       "https://docs.google.com/forms/d/e/1FAIpQLSfeGlEl4CMXWefdvCw6AOPHFS1ROku_rs-Gbofa2LkVJ0sLGQ/viewform", 
   },
@@ -178,7 +178,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink:
-      "https://drive.google.com/drive/folders/1XWGl7DCog_VTfCOCMz4Sp-7LXTD27ak1?usp=sharing",
+      "https://drive.google.com/drive/folders/1ifWA2ACXALYfObrfRzHJRHcDRrIDkYgh?usp=sharing",
     albumQR: "/QR/AlbumQR.png",
     hashtag: ["#MarlriazeAtEighteen"],
     instructions:

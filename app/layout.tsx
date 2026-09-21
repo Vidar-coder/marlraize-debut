@@ -17,13 +17,13 @@ const eventImageUrl = `${canonicalUrl}${desktopHero}`
 const OG_IMAGE_FALLBACK = `${canonicalUrl}${desktopHero}`
 
 const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`
-const eventTitle = `${coupleNames} - Wedding Invitation`
-const eventDescription = `Celebrate the wedding of ${siteConfig.couple.groomNickname} and ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date} at ${siteConfig.ceremony.venue}. RSVP, explore their story, and find everything you need to join the celebration.`
+const eventTitle = `${coupleNames} - Debut Invitation`
+const eventDescription = `Celebrate the debut of ${siteConfig.couple.debutNickname} on ${siteConfig.wedding.date} at ${siteConfig.ceremony.venue}. RSVP, explore their story, and find everything you need to join the celebration.`
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Wedding`,
+  name: `${siteConfig.couple.debutNickname} Debut`,
   startDate: "2026-04-18T14:00:00+08:00",
   endDate: "2026-04-18T22:00:00+08:00",
   eventStatus: "https://schema.org/EventScheduled",
@@ -54,12 +54,12 @@ const jsonLd = {
   ],
   image: [OG_IMAGE_FALLBACK],
   description:
-    `You're invited to celebrate the wedding of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}. Discover ceremony and reception details, RSVP, and explore their story.`,
+    `You're invited to celebrate the debut of ${siteConfig.couple.debutNickname}. Discover ceremony and reception details, RSVP, and explore their story.`,
   organizer: {
     "@type": "Person",
     name: coupleNames,
   },
-  eventHashtag: `#${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}SayIDo`,
+  eventHashtag: `#${siteConfig.couple.debutNickname}Debut`,
 }
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -86,14 +86,13 @@ export const metadata: Metadata = {
   },
   description: eventDescription,
   keywords:
-    `${siteConfig.couple.groomNickname} ${siteConfig.couple.brideNickname} wedding, ${siteConfig.ceremony.venue} wedding, ${siteConfig.reception.venue} wedding, wedding invitation, RSVP, wedding gallery, message wall, love story, #${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}SayIDo`,
-  applicationName: `${coupleNames} Wedding Invitation`,
+    `${siteConfig.couple.debutNickname} debut, ${siteConfig.ceremony.venue} debut, ${siteConfig.reception.venue} debut, debut invitation, RSVP, debut gallery, message wall, love story, #${siteConfig.couple.debutNickname}Debut`,
+  applicationName: `${coupleNames} Debut Invitation`,
   authors: [
-    { name: siteConfig.couple.groomNickname },
-    { name: siteConfig.couple.brideNickname },
+    { name: siteConfig.couple.debutNickname },
   ],
-  creator: coupleNames,
-  publisher: coupleNames,
+  creator: siteConfig.couple.debutNickname,
+  publisher: siteConfig.couple.debutNickname,
   category: "Event",
   formatDetection: {
     email: false,
@@ -117,11 +116,11 @@ export const metadata: Metadata = {
   },
   manifest: "/favicon_io/site.webmanifest",
   openGraph: {
-    title: `${coupleNames} | ${siteConfig.wedding.date}`,
+    title: `${siteConfig.couple.debutNickname} | ${siteConfig.wedding.date}`,
     description:
-      `Celebrate the union of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date}. Discover their story, RSVP, and find important details for the ceremony and reception.`,
+      `Celebrate the debut of ${siteConfig.couple.debutNickname} on ${siteConfig.wedding.date}. Discover their story, RSVP, and find important details for the ceremony and reception.`,
     url: canonicalUrl,
-    siteName: `${coupleNames} Wedding`,
+    siteName: `${siteConfig.couple.debutNickname} Debut`,
     locale: "en_PH",
     type: "website",
     images: [
@@ -131,7 +130,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/jpeg",
-        alt: `${coupleNames} Wedding Invitation - ${siteConfig.wedding.date}`,
+        alt: `${siteConfig.couple.debutNickname} Debut Invitation - ${siteConfig.wedding.date}`,
       },
       {
         url: OG_IMAGE_FALLBACK,
@@ -139,18 +138,18 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: `${coupleNames} Wedding Invitation - ${siteConfig.wedding.date}`,
+        alt: `${siteConfig.couple.debutNickname} Debut Invitation - ${siteConfig.wedding.date}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${coupleNames} Wedding Invitation`,
+    title: `${siteConfig.couple.debutNickname} Debut Invitation`,
     description:
-      `You're invited to the wedding of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date}. RSVP, explore their story, and get all the details for the big day! #${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}SayIDo`,
+      `You're invited to the debut of ${siteConfig.couple.debutNickname} on ${siteConfig.wedding.date}. RSVP, explore their story, and get all the details for the big day! #${siteConfig.couple.debutNickname}Debut`,
     images: [OG_IMAGE_FALLBACK, eventImageUrl ],
-    creator: `@${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}`,
-    site: `@${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}`,
+    creator: `@${siteConfig.couple.debutNickname}`,
+    site: `@${siteConfig.couple.debutNickname}`,
   },
   robots: {
     index: true,
@@ -164,7 +163,7 @@ export const metadata: Metadata = {
     },
   },
   appleWebApp: {
-    title: coupleNames,
+    title: siteConfig.couple.debutNickname,
     statusBarStyle: "default",
     capable: true,
   },

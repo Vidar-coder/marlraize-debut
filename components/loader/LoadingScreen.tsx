@@ -16,9 +16,9 @@ interface LoadingScreenProps {
 }
 
 const COUNTDOWN_BOXES = [
-  { src: encodeURI('/envelope/box (1).jpg') },
-  { src: encodeURI('/envelope/box (2).jpg') },
-  { src: encodeURI('/envelope/box (3).jpg') },
+  { src: encodeURI('/envelope/box (2).jpeg') },
+  { src: encodeURI('/envelope/box (5).jpeg') },
+  { src: encodeURI('/envelope/box (1).jpeg') },
 ];
 
 const DEBUT_MARK = '/Details/debut.png';
