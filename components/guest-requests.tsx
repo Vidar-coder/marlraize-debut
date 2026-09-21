@@ -174,7 +174,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
           <div className="flex-1">
             <h3 className="font-semibold text-purple-900 mb-1">Join Requests</h3>
             <p className="text-sm text-purple-700">
-              These are guests who have requested to join your wedding. Review and approve them to add to your guest list, or edit/delete as needed.
+              These are guests who have requested to join the debut. Review and approve them to add to your guest list, or edit/delete as needed.
             </p>
           </div>
         </div>

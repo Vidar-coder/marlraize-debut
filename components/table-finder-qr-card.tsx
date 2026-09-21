@@ -24,14 +24,16 @@ const aboveTheBeyond = localFont({
   display: "swap",
 })
 
-const IVORY = "#fffaf4"
-const GOLD = "var(--color-welcome-gold)"
-const NAVY = "var(--color-welcome-navy)"
-const SCRIPT = "var(--color-welcome-green)"
-const BODY = "var(--color-welcome-text)"
-const NAV_GOLD = "linear-gradient(180deg, #E8D5A3 0%, #CDB072 52%, #C4A265 100%)"
-const GOLD_BORDER = "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)"
-const QR_FG = "#5E5144"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const GOLD = ROSE
+const NAVY = COCOA
+const SCRIPT = ROSE
+const BODY = COCOA
+const NAV_GOLD = "linear-gradient(180deg, #E6A39B 0%, #C89E8C 52%, #976C58 100%)"
+const GOLD_BORDER = "color-mix(in srgb, #E6A39B 38%, transparent)"
+const QR_FG = COCOA
 const PRINT_QR_ID = "table-finder-qr-print"
 const DISPLAY_QR_ID = "table-finder-qr"
 
@@ -39,10 +41,9 @@ export function TableFinderQrCard() {
   const siteConfig = useSiteConfig()
   const [tableUrl, setTableUrl] = useState("")
 
-  const groomName = siteConfig.couple.groomNickname || siteConfig.couple.groom
-  const brideName = siteConfig.couple.brideNickname || siteConfig.couple.bride
-  const coupleLine = `${groomName} & ${brideName}`
-  const fileSlug = `${groomName}-${brideName}`
+  const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
+  const coupleLine = `${debutName}'s Debut`
+  const fileSlug = debutName
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
@@ -58,7 +59,7 @@ export function TableFinderQrCard() {
     if (!canvas) return
 
     const link = document.createElement("a")
-    link.download = `${fileSlug || "wedding"}-find-your-table-qr.png`
+    link.download = `${fileSlug || "debut"}-find-your-table-qr.png`
     link.href = canvas.toDataURL("image/png")
     link.click()
   }
@@ -70,10 +71,9 @@ export function TableFinderQrCard() {
         background: IVORY,
         borderColor: GOLD_BORDER,
         boxShadow:
-          "0 10px 28px color-mix(in srgb, var(--color-welcome-gold) 12%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)",
+          "0 10px 28px color-mix(in srgb, #E6A39B 12%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)",
       }}
     >
-      <div className="wedding-frame-inner hidden min-[400px]:block" aria-hidden />
       <div className="relative grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-8">
         <div className="mx-auto flex max-w-[240px] flex-col items-center">
           <div
@@ -81,7 +81,7 @@ export function TableFinderQrCard() {
             style={{
               backgroundColor: IVORY,
               borderColor: GOLD_BORDER,
-              boxShadow: "0 8px 24px color-mix(in srgb, var(--color-welcome-gold) 12%, transparent)",
+              boxShadow: "0 8px 24px color-mix(in srgb, #E6A39B 12%, transparent)",
             }}
           >
             <span className="absolute left-2 top-2 h-3 w-3 border-l-2 border-t-2 sm:left-2.5 sm:top-2.5" style={{ borderColor: GOLD }} aria-hidden />
@@ -100,7 +100,7 @@ export function TableFinderQrCard() {
                 className="h-auto w-full max-w-[196px]"
               />
             ) : (
-              <div className="h-[196px] w-[196px] animate-pulse rounded-md" style={{ backgroundColor: "color-mix(in srgb, #E8D5A3 28%, white)" }} />
+              <div className="h-[196px] w-[196px] animate-pulse rounded-md" style={{ backgroundColor: "color-mix(in srgb, #E6A39B 28%, white)" }} />
             )}
           </div>
           <p
@@ -144,7 +144,7 @@ export function TableFinderQrCard() {
                 background: NAV_GOLD,
                 borderColor: GOLD_BORDER,
                 color: IVORY,
-                boxShadow: "0 8px 18px color-mix(in srgb, var(--color-welcome-gold) 22%, transparent)",
+                boxShadow: "0 8px 18px color-mix(in srgb, #E6A39B 22%, transparent)",
               }}
             >
               <Download className="h-3.5 w-3.5" />

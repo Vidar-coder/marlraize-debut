@@ -74,9 +74,11 @@ export function DashboardSidebar({
           <div className="w-8 h-8 bg-[#A67C52] rounded-lg flex items-center justify-center">
             <span className="text-white font-serif text-lg">♥</span>
           </div>
-          <span className="font-serif text-lg font-bold text-[#6B4423]">Wedding Invitation</span>
+          <span className="font-serif text-lg font-bold text-[#6B4423]">Debut Invitation</span>
         </div>
-        <p className="text-xs text-[#6B7280] uppercase tracking-wide">Dashboard Panel</p>
+        <p className="text-xs text-[#6B7280] uppercase tracking-wide">
+          {siteConfig.couple.debutNickname || siteConfig.couple.debut}
+        </p>
       </div>
 
       {/* Navigation Items */}

@@ -91,11 +91,10 @@ export function ProposalDashboard() {
     const namePrefix = inviteeName.trim() ? `Hi ${inviteeName.trim()}! ` : "Hi! "
     const roleSingular = getRoleSingular(selectedInviteRole.title)
     const url = getProposalLink(selectedInviteRole.id)
-    const groom = siteConfig.couple.groomNickname
-    const bride = siteConfig.couple.brideNickname
+    const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
     const date = siteConfig.wedding.date
 
-    return `${namePrefix}${groom} and ${bride} are getting married on ${date}! 💍\n\nBecause you are such a wonderful model of love, laughter, and support, they would be absolutely honored if you would stand by their side as their ${roleSingular}.\n\nRead their formal proposal here and let them know your thoughts:\n👉 ${url}`
+    return `${namePrefix}${debutName} is celebrating her debut on ${date}! ✨\n\nBecause you are such a wonderful model of love, laughter, and support, she would be absolutely honored if you would stand by her side as her ${roleSingular}.\n\nRead her formal invitation here and let her know your thoughts:\n👉 ${url}`
   }
 
   const handleCopyInviteText = () => {

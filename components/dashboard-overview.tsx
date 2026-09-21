@@ -3,6 +3,7 @@
 import { Users, Table, Mail, UserPlus, Plane, CheckCircle, XCircle, Crown, UserCheck } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { TableFinderQrCard } from "@/components/table-finder-qr-card"
+import { useSiteConfig } from "@/hooks/use-site-config"
 
 interface DashboardOverviewProps {
   stats: {
@@ -51,9 +52,12 @@ function StatCard({ icon, value, label, iconBgColor, iconColor }: StatCardProps)
 }
 
 export function DashboardOverview({ stats, weddingBrief }: DashboardOverviewProps) {
+  const siteConfig = useSiteConfig()
+  const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
+
   const defaultBrief = {
-    title: "Gemini's Wedding Brief",
-    content: `Here are a few options for a joyful status update: **Option 1: Sweet and simple** "The countdown is officially on! 🔔 We already have ${stats.confirmedPax} of our favorite people confirmed, and we can't wait to hear from the rest of you. We are so excited to see our final group of ${stats.guestGroups} come together for the big day! ❤️ **Option 2: High energy** "RSVPs are rolling in and our hearts are full! ❤️ ${stats.confirmedPax} 'Yes' responses down, ${stats.pendingRSVP} more to hear from! We can't wait to reach our magic number of ${stats.guestGroups} and celebrate the best day ever with you all! 🎉 ✨ **Option 3: Short and punchy** "${stats.confirmedPax} confirmed, ${stats.pendingRSVP} to go! 📝 Watching the guest list grow is getting us so excited for our celebration of ${stats.guestGroups}. Let the wedding countdown begin! 🔔 ✨ **Option 4: Focus on the "Yes"*** "It's getting real! ⭕ We've got ${stats.confirmedPax} 'Yes' votes in the bag and ${stats.pendingRSVP} more pending. We can't wait to see who fills our final ${stats.guestGroups} spots—see you at the altar! 💕 🔔 ""`
+    title: `${debutName}'s Debut Brief`,
+    content: `Here are a few options for a joyful status update: **Option 1: Sweet and simple** "The countdown is officially on! 🔔 We already have ${stats.confirmedPax} of our favorite people confirmed, and we can't wait to hear from the rest of you. We are so excited to see our final group of ${stats.guestGroups} come together for ${debutName}'s debut! ❤️ **Option 2: High energy** "RSVPs are rolling in and our hearts are full! ❤️ ${stats.confirmedPax} 'Yes' responses down, ${stats.pendingRSVP} more to hear from! We can't wait to reach our magic number of ${stats.guestGroups} and celebrate her eighteenth with you all! 🎉 ✨ **Option 3: Short and punchy** "${stats.confirmedPax} confirmed, ${stats.pendingRSVP} to go! 📝 Watching the guest list grow is getting us so excited for ${debutName}'s debut of ${stats.guestGroups}. Let the countdown begin! 🔔 ✨ **Option 4: Focus on the Yes** "It's getting real! ⭕ We've got ${stats.confirmedPax} 'Yes' votes in the bag and ${stats.pendingRSVP} more pending. We can't wait to see who fills our final ${stats.guestGroups} spots—see you at her debut! 💕 🔔"`,
   }
 
   const brief = weddingBrief || defaultBrief
@@ -62,7 +66,7 @@ export function DashboardOverview({ stats, weddingBrief }: DashboardOverviewProp
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-[#111827] mb-2">Wedding Overview</h1>
+        <h1 className="text-3xl font-bold text-[#111827] mb-2">{debutName}&apos;s Debut Overview</h1>
       </div>
 
       {/* Stats Cards Grid */}

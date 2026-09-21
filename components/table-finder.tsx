@@ -17,7 +17,6 @@ import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
-import { sectionBackground } from "@/lib/section-background"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -36,22 +35,32 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const IVORY = "#fffaf4"
-const GOLD = "var(--color-welcome-gold)"
-const NAVY = "var(--color-welcome-navy)"
-const SCRIPT = "var(--color-welcome-green)"
-const BODY = "var(--color-welcome-text)"
-const NAV_GOLD = "linear-gradient(180deg, #E8D5A3 0%, #CDB072 52%, #C4A265 100%)"
-const GOLD_BORDER = "color-mix(in srgb, var(--color-welcome-gold) 38%, transparent)"
-const GOLD_BORDER_SOFT = "color-mix(in srgb, var(--color-welcome-gold) 22%, transparent)"
-const CHAMPAGNE = "#E8D5A3"
+const IVORY = "#FDECE6"
+const ROSE = "#E6A39B"
+const COCOA = "#976C58"
+const SAGE = "#A5B29A"
+const GOLD = ROSE
+const NAVY = COCOA
+const SCRIPT = ROSE
+const BODY = COCOA
+const NAV_GOLD = "linear-gradient(180deg, #E6A39B 0%, #C89E8C 52%, #976C58 100%)"
+const GOLD_BORDER = "color-mix(in srgb, #E6A39B 38%, transparent)"
+const GOLD_BORDER_SOFT = "color-mix(in srgb, #E6A39B 22%, transparent)"
+const CHAMPAGNE = ROSE
+
+const sectionBackground = `
+  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, #F4CFC8 42%, transparent) 0%, transparent 55%),
+  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${SAGE} 14%, transparent) 0%, transparent 58%),
+  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${ROSE} 16%, transparent) 0%, transparent 55%),
+  linear-gradient(180deg, ${IVORY} 0%, #FCE7E1 48%, ${IVORY} 100%)
+`.trim()
 
 const goldDividerStyle = {
-  background: "linear-gradient(to right, transparent, var(--color-welcome-gold), transparent)",
+  background: "linear-gradient(to right, transparent, #E6A39B, transparent)",
 } as const
 
 const goldDividerStyleLeft = {
-  background: "linear-gradient(to left, transparent, var(--color-welcome-gold), transparent)",
+  background: "linear-gradient(to left, transparent, #E6A39B, transparent)",
 } as const
 
 const cardStyle = {
@@ -60,11 +69,11 @@ const cardStyle = {
   borderWidth: "1px",
   borderStyle: "solid" as const,
   boxShadow:
-    "0 10px 28px color-mix(in srgb, var(--color-welcome-gold) 12%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)",
+    "0 10px 28px color-mix(in srgb, #E6A39B 12%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)",
 } as const
 
 const innerSurfaceStyle = {
-  background: `color-mix(in srgb, ${IVORY} 82%, ${CHAMPAGNE})`,
+  background: `color-mix(in srgb, ${IVORY} 82%, ${ROSE})`,
   borderColor: GOLD_BORDER_SOFT,
 } as const
 
@@ -72,7 +81,7 @@ const primaryButtonStyle = {
   background: NAV_GOLD,
   borderColor: GOLD_BORDER,
   color: IVORY,
-  boxShadow: "0 8px 18px color-mix(in srgb, var(--color-welcome-gold) 22%, transparent)",
+  boxShadow: "0 8px 18px color-mix(in srgb, #E6A39B 22%, transparent)",
 } as const
 
 const CORNER_DECO_CLASS =
@@ -267,17 +276,17 @@ function RsvpBadge({ status, compact = false }: { status: RsvpStatus; compact?: 
           : "px-2 py-0.5 text-[0.55rem] sm:px-2.5 sm:text-[0.625rem]"
       }`}
       style={{
-        color: isConfirmed ? "#3f5a32" : isDeclined ? "#9b3d3d" : BODY,
+        color: isConfirmed ? "#6B7A5F" : isDeclined ? "#9b3d3d" : BODY,
         borderColor: isConfirmed
-          ? "color-mix(in srgb, #5d6f47 35%, transparent)"
+          ? "color-mix(in srgb, #A5B29A 45%, transparent)"
           : isDeclined
             ? "color-mix(in srgb, #9b3d3d 35%, transparent)"
             : GOLD_BORDER,
         backgroundColor: isConfirmed
-          ? "color-mix(in srgb, #5d6f47 12%, white)"
+          ? "color-mix(in srgb, #A5B29A 22%, white)"
           : isDeclined
-            ? "color-mix(in srgb, #9b3d3d 8%, white)"
-            : `color-mix(in srgb, ${IVORY} 82%, ${CHAMPAGNE})`,
+            ? "color-mix(in srgb, #E6A39B 16%, white)"
+            : `color-mix(in srgb, ${IVORY} 82%, ${ROSE})`,
       }}
     >
       <Icon className={compact ? "h-2.5 w-2.5" : "h-3 w-3"} aria-hidden />
@@ -368,14 +377,13 @@ const howItWorks = [
     step: "Three",
     title: "Sit",
     icon: Armchair,
-    body: "Walk to your table, take your seat, and enjoy the evening.",
+    body: "Walk to your table, take your seat, and enjoy her debut.",
   },
 ] as const
 
 export function TableFinder() {
   const siteConfig = useSiteConfig()
-  const groomName = siteConfig.couple.groomNickname || siteConfig.couple.groom
-  const brideName = siteConfig.couple.brideNickname || siteConfig.couple.bride
+  const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
 
   const [entries, setEntries] = useState<SeatEntry[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -463,19 +471,19 @@ export function TableFinder() {
     >
       <div className="pointer-events-none absolute left-0 top-0 z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/decoration/left-top-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
+        <img src="/decoration/deco/top-left-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
       </div>
       <div className="pointer-events-none absolute right-0 top-0 z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/decoration/right-top-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
+        <img src="/decoration/deco/top-right-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
       </div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/decoration/left-bottom-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
+        <img src="/decoration/deco/bottom-left-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
       </div>
       <div className="pointer-events-none absolute bottom-0 right-0 z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/decoration/right-bottom-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
+        <img src="/decoration/deco/bottom-right-corner.png" alt="" aria-hidden="true" className={CORNER_DECO_CLASS} />
       </div>
 
       <section className="relative z-20 mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 md:px-8">
@@ -488,19 +496,7 @@ export function TableFinder() {
             className={`${cinzel.className} ${sectionType.label} font-semibold uppercase leading-normal tracking-[0.18em] min-[400px]:tracking-[0.28em] sm:tracking-[0.36em]`}
             style={{ color: GOLD }}
           >
-            {groomName}
-            <span
-              className={`${aboveTheBeyond.className} mx-1 inline-block normal-case tracking-normal sm:mx-2`}
-              style={{
-                fontSize: "1.35em",
-                color: SCRIPT,
-                verticalAlign: "middle",
-              }}
-              aria-hidden
-            >
-              &
-            </span>
-            {brideName}
+            {debutName}&apos;s Debut
           </p>
 
           <h1
@@ -526,7 +522,7 @@ export function TableFinder() {
                 fontSize: "var(--script-size)",
                 color: SCRIPT,
                 textShadow:
-                  "0 1px 0 color-mix(in srgb, var(--color-welcome-bg) 95%, white), 0 0 10px color-mix(in srgb, var(--color-welcome-bg) 65%, white)",
+                  "0 1px 0 color-mix(in srgb, #FDECE6 95%, white), 0 0 10px color-mix(in srgb, #FDECE6 65%, white)",
               }}
             >
               Please be seated
@@ -577,7 +573,7 @@ export function TableFinder() {
                   borderColor: GOLD_BORDER,
                   color: NAVY,
                   backgroundColor: IVORY,
-                  boxShadow: "0 10px 28px color-mix(in srgb, var(--color-welcome-gold) 12%, transparent)",
+                  boxShadow: "0 10px 28px color-mix(in srgb, #E6A39B 12%, transparent)",
                 }}
                 autoComplete="off"
                 autoCorrect="off"
@@ -661,7 +657,7 @@ export function TableFinder() {
                 }}
               >
                 <p className={`font-goudy-italic ${sectionType.textSnug}`} style={{ color: BODY }}>
-                  We couldn&apos;t find that name. Try another spelling, or ask the couple if
+                  We couldn&apos;t find that name. Try another spelling, or ask the family if
                   you&apos;re not on the list.
                 </p>
               </div>
@@ -674,7 +670,6 @@ export function TableFinder() {
             className="relative mx-auto mt-5 max-w-xl overflow-hidden rounded-2xl border px-5 py-6 text-center sm:mt-7 sm:px-8 sm:py-8"
             style={cardStyle}
           >
-            <div className="wedding-frame-inner hidden min-[400px]:block" aria-hidden />
             <p className={`font-goudy-italic ${sectionType.text}`} style={{ color: BODY }}>
               Hello{" "}
               <span className="font-semibold" style={{ color: NAVY }}>
@@ -723,7 +718,7 @@ export function TableFinder() {
                 : selectedSeat.status === "confirmed"
                   ? "You're confirmed. Your table will appear here once seating is posted."
                   : selectedSeat.status === "declined"
-                    ? "You've let us know you can't attend. If plans change, please tell the couple."
+                    ? "You've let us know you can't attend. If plans change, please tell the family."
                     : selectedSeat.tableNumber
                       ? "A seat is waiting for you. Please RSVP so we can confirm it."
                       : "Please RSVP first. Your table will appear here once seating is posted."}
@@ -830,9 +825,9 @@ export function TableFinder() {
                     className="rounded-2xl border p-3.5 sm:p-5"
                     style={{
                       ...cardStyle,
-                      borderColor: isSelectedTable ? "var(--color-welcome-gold)" : GOLD_BORDER,
+                      borderColor: isSelectedTable ? ROSE : GOLD_BORDER,
                       boxShadow: isSelectedTable
-                        ? "0 12px 36px color-mix(in srgb, var(--color-welcome-gold) 28%, transparent), inset 0 1px 0 rgb(255 250 244 / 70%)"
+                        ? "0 12px 36px color-mix(in srgb, #E6A39B 28%, transparent), inset 0 1px 0 rgb(253 236 230 / 70%)"
                         : cardStyle.boxShadow,
                     }}
                   >

@@ -43,6 +43,7 @@ interface PrincipalSponsor {
 
 export default function DashboardPage() {
   const siteConfig = useSiteConfig()
+  const debutName = siteConfig.couple.debutNickname || siteConfig.couple.debut
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -438,14 +439,14 @@ export default function DashboardPage() {
               </div>
               <div className="mb-2">
                 <span className="font-serif text-sm text-[#A67C52]">♥</span>
-                <span className="font-serif text-2xl font-bold text-[#6B4423] mx-2">Wedding Invitation</span>
+                <span className="font-serif text-2xl font-bold text-[#6B4423] mx-2">Debut Invitation</span>
                 <span className="font-serif text-sm text-[#A67C52]">♥</span>
               </div>
               <h1 className="text-2xl font-bold text-[#111827] mb-2">
                 Admin Dashboard
               </h1>
               <p className="text-[#6B7280] text-sm">
-                Enter password to access the wedding management panel
+                Enter password to access {debutName}&apos;s debut management panel
               </p>
             </div>
 
@@ -503,7 +504,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-sm text-[#6B7280] font-medium">Welcome back,</h2>
               <h1 className="text-xl font-bold text-[#111827]">
-                {siteConfig.couple.groomNickname} & {siteConfig.couple.brideNickname}
+                {debutName}
               </h1>
             </div>
             <div className="flex items-center gap-3">

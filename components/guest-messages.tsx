@@ -91,7 +91,7 @@ export function GuestMessages({ messages, onRefresh, isLoading = false }: GuestM
           <div className="flex-1">
             <h3 className="font-semibold text-[#6B4423] text-lg mb-2">Messages from Your Guests</h3>
             <p className="text-sm text-[#6B7280]">
-              Read heartfelt messages and well wishes from your guests. These messages were submitted through your wedding website.
+              Read heartfelt messages and well wishes from your guests. These messages were submitted through the debut invitation.
             </p>
           </div>
         </div>
