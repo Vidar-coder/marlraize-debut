@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
+import { createPortal } from "react-dom"
 import Link from "next/link"
 import Image from "next/image"
 import localFont from "next/font/local"
@@ -119,79 +120,335 @@ const galleryItems = [
 
 ]
 
-export function Gallery() {
+function clamp(val: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, val))
+}
 
-  const [selectedImage, setSelectedImage] = useState<(typeof galleryItems)[0] | null>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
-  // reserved for potential skeleton tracking; not used after fade-in simplification
-  const [touchStartX, setTouchStartX] = useState<number | null>(null)
-  const [touchDeltaX, setTouchDeltaX] = useState(0)
+function GalleryLightbox({
+  items,
+  index,
+  onClose,
+  onNavigate,
+}: {
+  items: typeof galleryItems
+  index: number
+  onClose: () => void
+  onNavigate: (direction: "prev" | "next") => void
+}) {
+  const item = items[index]
+  const stageRef = useRef<HTMLDivElement>(null)
   const [zoomScale, setZoomScale] = useState(1)
   const [pan, setPan] = useState({ x: 0, y: 0 })
   const [pinchStartDist, setPinchStartDist] = useState<number | null>(null)
   const [pinchStartScale, setPinchStartScale] = useState(1)
   const [lastTap, setLastTap] = useState(0)
-  const [panStart, setPanStart] = useState<{ x: number; y: number; panX: number; panY: number } | null>(null)
+  const [panStart, setPanStart] = useState<{
+    x: number
+    y: number
+    panX: number
+    panY: number
+  } | null>(null)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null)
+  const [touchDeltaX, setTouchDeltaX] = useState(0)
+
+  const resetZoom = useCallback(() => {
+    setZoomScale(1)
+    setPan({ x: 0, y: 0 })
+    setPanStart(null)
+  }, [])
 
   useEffect(() => {
-    // Simulate loading for better UX
+    resetZoom()
+  }, [index, resetZoom])
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") onNavigate("prev")
+      if (e.key === "ArrowRight") onNavigate("next")
+      if (e.key === "Escape") onClose()
+    }
+    window.addEventListener("keydown", handleKeyPress)
+    return () => window.removeEventListener("keydown", handleKeyPress)
+  }, [onClose, onNavigate])
+
+  useEffect(() => {
+    const html = document.documentElement
+    const previousHtml = html.style.overflow
+    const previousBody = document.body.style.overflow
+    html.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
+    return () => {
+      html.style.overflow = previousHtml
+      document.body.style.overflow = previousBody
+    }
+  }, [])
+
+  useEffect(() => {
+    const next = new window.Image()
+    next.src = items[(index + 1) % items.length].image
+    const prev = new window.Image()
+    prev.src = items[(index - 1 + items.length) % items.length].image
+  }, [index, items])
+
+  useEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      const delta = e.deltaY < 0 ? 0.18 : -0.18
+      setZoomScale((scale) => {
+        const next = clamp(scale + delta, 1, 4)
+        if (next === 1) setPan({ x: 0, y: 0 })
+        return next
+      })
+    }
+
+    stage.addEventListener("wheel", onWheel, { passive: false })
+    return () => stage.removeEventListener("wheel", onWheel)
+  }, [])
+
+  const zoomAtPoint = (clientX: number, clientY: number, nextScale: number) => {
+    const stage = stageRef.current
+    if (!stage) {
+      setZoomScale(nextScale)
+      if (nextScale === 1) setPan({ x: 0, y: 0 })
+      return
+    }
+    const rect = stage.getBoundingClientRect()
+    const cx = clientX - rect.left - rect.width / 2
+    const cy = clientY - rect.top - rect.height / 2
+    const ratio = nextScale / zoomScale
+    setPan({
+      x: nextScale === 1 ? 0 : cx - (cx - pan.x) * ratio,
+      y: nextScale === 1 ? 0 : cy - (cy - pan.y) * ratio,
+    })
+    setZoomScale(nextScale)
+  }
+
+  if (!item) return null
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: "rgba(18, 11, 9, 0.94)" }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Gallery photo"
+    >
+      <div
+        ref={stageRef}
+        className="relative flex h-full w-full touch-none items-center justify-center overflow-hidden"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose()
+        }}
+        onDoubleClick={(e) => {
+          if (zoomScale > 1) {
+            resetZoom()
+            return
+          }
+          zoomAtPoint(e.clientX, e.clientY, 2.2)
+        }}
+        onMouseDown={(e) => {
+          if (zoomScale <= 1 || e.button !== 0) return
+          setPanStart({ x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y })
+        }}
+        onMouseMove={(e) => {
+          if (!panStart) return
+          setPan({
+            x: panStart.panX + (e.clientX - panStart.x),
+            y: panStart.panY + (e.clientY - panStart.y),
+          })
+        }}
+        onMouseUp={() => setPanStart(null)}
+        onMouseLeave={() => setPanStart(null)}
+        onTouchStart={(e) => {
+          if (e.touches.length === 1) {
+            const now = Date.now()
+            const t = e.touches[0]
+            if (now - lastTap < 300) {
+              if (zoomScale > 1) resetZoom()
+              else zoomAtPoint(t.clientX, t.clientY, 2.2)
+            }
+            setLastTap(now)
+            setTouchStartX(t.clientX)
+            setTouchDeltaX(0)
+            if (zoomScale > 1) {
+              setPanStart({ x: t.clientX, y: t.clientY, panX: pan.x, panY: pan.y })
+            }
+          }
+          if (e.touches.length === 2) {
+            const dx = e.touches[0].clientX - e.touches[1].clientX
+            const dy = e.touches[0].clientY - e.touches[1].clientY
+            setPinchStartDist(Math.hypot(dx, dy))
+            setPinchStartScale(zoomScale)
+          }
+        }}
+        onTouchMove={(e) => {
+          if (e.touches.length === 2 && pinchStartDist) {
+            const dx = e.touches[0].clientX - e.touches[1].clientX
+            const dy = e.touches[0].clientY - e.touches[1].clientY
+            const dist = Math.hypot(dx, dy)
+            setZoomScale(clamp((dist / pinchStartDist) * pinchStartScale, 1, 4))
+          } else if (e.touches.length === 1) {
+            const t = e.touches[0]
+            if (zoomScale > 1 && panStart) {
+              setPan({
+                x: panStart.panX + (t.clientX - panStart.x),
+                y: panStart.panY + (t.clientY - panStart.y),
+              })
+            } else if (touchStartX !== null) {
+              setTouchDeltaX(t.clientX - touchStartX)
+            }
+          }
+        }}
+        onTouchEnd={() => {
+          setPinchStartDist(null)
+          setPanStart(null)
+          if (zoomScale === 1 && Math.abs(touchDeltaX) > 50) {
+            onNavigate(touchDeltaX > 0 ? "prev" : "next")
+          }
+          setTouchStartX(null)
+          setTouchDeltaX(0)
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(230,163,155,0.12),transparent_62%)]" />
+
+        <div className="relative z-10 flex h-[calc(100dvh-5.5rem)] w-[min(100%,96vw)] items-center justify-center sm:h-[calc(100dvh-6.5rem)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={item.image}
+            src={item.image}
+            alt={item.text?.trim() || `Gallery image ${index + 1}`}
+            draggable={false}
+            className={`max-h-full max-w-full select-none object-contain shadow-[0_24px_80px_rgba(0,0,0,0.5)] ${
+              zoomScale > 1 ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-in"
+            }`}
+            style={{
+              transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoomScale})`,
+              transition: pinchStartDist || panStart ? "none" : "transform 220ms ease-out",
+              transformOrigin: "center center",
+            }}
+          />
+        </div>
+
+        <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-3 py-3 sm:px-6 sm:py-5">
+          <div
+            className={`${cinzel.className} rounded-full border px-3 py-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.16em] backdrop-blur-md sm:px-4 sm:py-2 sm:text-xs`}
+            style={{
+              backgroundColor: "color-mix(in srgb, #976C58 55%, transparent)",
+              borderColor: ROSE_BORDER,
+              color: IVORY,
+            }}
+          >
+            {index + 1} / {items.length}
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full border p-2 backdrop-blur-md transition-transform duration-200 hover:scale-105 sm:p-2.5"
+            style={{
+              backgroundColor: "color-mix(in srgb, #976C58 70%, transparent)",
+              borderColor: ROSE_BORDER,
+              color: IVORY,
+            }}
+            aria-label="Close photo"
+          >
+            <X size={20} className="sm:h-6 sm:w-6" />
+          </button>
+        </div>
+
+        {items.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() => onNavigate("prev")}
+              className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full border p-2.5 backdrop-blur-md transition-transform duration-200 hover:scale-105 sm:left-5 sm:p-3.5"
+              style={{
+                background: NAV_ROSE,
+                borderColor: ROSE_BORDER,
+                color: IVORY,
+              }}
+              aria-label="Previous photo"
+            >
+              <ChevronLeft size={24} className="sm:h-7 sm:w-7" />
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate("next")}
+              className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full border p-2.5 backdrop-blur-md transition-transform duration-200 hover:scale-105 sm:right-5 sm:p-3.5"
+              style={{
+                background: NAV_ROSE,
+                borderColor: ROSE_BORDER,
+                color: IVORY,
+              }}
+              aria-label="Next photo"
+            >
+              <ChevronRight size={24} className="sm:h-7 sm:w-7" />
+            </button>
+          </>
+        )}
+
+        {zoomScale > 1 && (
+          <button
+            type="button"
+            onClick={resetZoom}
+            className={`${cinzel.className} absolute bottom-14 right-3 z-20 rounded-full border px-3 py-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.16em] backdrop-blur-md sm:bottom-6 sm:right-6`}
+            style={{
+              backgroundColor: "color-mix(in srgb, #976C58 70%, transparent)",
+              borderColor: ROSE_BORDER,
+              color: IVORY,
+            }}
+          >
+            Reset Zoom
+          </button>
+        )}
+
+        {items.length > 1 && (
+          <p
+            className={`${cinzel.className} absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full border px-3 py-1 text-[0.6rem] uppercase tracking-[0.16em] sm:hidden`}
+            style={{
+              backgroundColor: "color-mix(in srgb, #976C58 55%, transparent)",
+              borderColor: ROSE_BORDER,
+              color: IVORY,
+            }}
+          >
+            Swipe or pinch
+          </p>
+        )}
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
+export function Gallery() {
+  const [selectedImage, setSelectedImage] = useState<(typeof galleryItems)[0] | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 500)
     return () => clearTimeout(timer)
   }, [])
 
-  const navigateImage = useCallback((direction: 'prev' | 'next') => {
+  const navigateImage = useCallback((direction: "prev" | "next") => {
     setCurrentIndex((prevIndex) => {
-      let newIndex = prevIndex
-      if (direction === 'next') {
-        newIndex = (prevIndex + 1) % galleryItems.length
-      } else {
-        newIndex = (prevIndex - 1 + galleryItems.length) % galleryItems.length
-      }
+      const newIndex =
+        direction === "next"
+          ? (prevIndex + 1) % galleryItems.length
+          : (prevIndex - 1 + galleryItems.length) % galleryItems.length
       setSelectedImage(galleryItems[newIndex])
       return newIndex
     })
   }, [])
 
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (!selectedImage) return
-      if (e.key === 'ArrowLeft') navigateImage('prev')
-      if (e.key === 'ArrowRight') navigateImage('next')
-      if (e.key === 'Escape') setSelectedImage(null)
-    }
-
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [selectedImage, currentIndex, navigateImage])
-
-  // Prevent background scroll when lightbox is open
-  useEffect(() => {
-    if (selectedImage) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [selectedImage])
-
-  // Preload adjacent images for smoother nav
-  useEffect(() => {
-    if (selectedImage) {
-      const next = new window.Image()
-      next.src = galleryItems[(currentIndex + 1) % galleryItems.length].image
-      const prev = new window.Image()
-      prev.src = galleryItems[(currentIndex - 1 + galleryItems.length) % galleryItems.length].image
-    }
-  }, [selectedImage, currentIndex])
-
-  const clamp = (val: number, min: number, max: number) => Math.min(max, Math.max(min, val))
-  const resetZoom = () => {
-    setZoomScale(1)
-    setPan({ x: 0, y: 0 })
-    setPanStart(null)
+  const openImage = (item: (typeof galleryItems)[0], index: number) => {
+    setSelectedImage(item)
+    setCurrentIndex(index)
   }
 
   return (
@@ -299,10 +556,7 @@ export function Gallery() {
                     key={item.image + index}
                     type="button"
                     className="group relative snap-center shrink-0 w-[82%] overflow-hidden rounded-lg transition-all duration-300"
-                    onClick={() => {
-                      setSelectedImage(item)
-                      setCurrentIndex(index)
-                    }}
+                    onClick={() => openImage(item, index)}
                     aria-label={`Open image ${index + 1}`}
                   >
                     <div
@@ -357,10 +611,7 @@ export function Gallery() {
                   key={item.image + index}
                   type="button"
                   className="group relative w-full overflow-hidden rounded-xl transition-all duration-300"
-                  onClick={() => {
-                    setSelectedImage(item)
-                    setCurrentIndex(index)
-                  }}
+                  onClick={() => openImage(item, index)}
                   aria-label={`Open image ${index + 1}`}
                 >
                   <div
@@ -417,175 +668,13 @@ export function Gallery() {
         )}
       </div>
 
-      {/* Lightbox Modal */}
       {selectedImage && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
-          onClick={() => {
-            setSelectedImage(null)
-            resetZoom()
-          }}
-        >
-            <div
-              className="relative max-w-6xl w-full h-full sm:h-auto flex flex-col items-center justify-center"
-              onTouchStart={(e) => {
-                if (e.touches.length === 1) {
-                  const now = Date.now()
-                  if (now - lastTap < 300) {
-                    setZoomScale((s) => (s > 1 ? 1 : 2))
-                    setPan({ x: 0, y: 0 })
-                  }
-                  setLastTap(now)
-                  const t = e.touches[0]
-                  setTouchStartX(t.clientX)
-                  setTouchDeltaX(0)
-                  if (zoomScale > 1) {
-                    setPanStart({ x: t.clientX, y: t.clientY, panX: pan.x, panY: pan.y })
-                  }
-                }
-                if (e.touches.length === 2) {
-                  const dx = e.touches[0].clientX - e.touches[1].clientX
-                  const dy = e.touches[0].clientY - e.touches[1].clientY
-                  const dist = Math.hypot(dx, dy)
-                  setPinchStartDist(dist)
-                  setPinchStartScale(zoomScale)
-                }
-              }}
-              onTouchMove={(e) => {
-                if (e.touches.length === 2 && pinchStartDist) {
-                  const dx = e.touches[0].clientX - e.touches[1].clientX
-                  const dy = e.touches[0].clientY - e.touches[1].clientY
-                  const dist = Math.hypot(dx, dy)
-                  const scale = clamp((dist / pinchStartDist) * pinchStartScale, 1, 3)
-                  setZoomScale(scale)
-                } else if (e.touches.length === 1) {
-                  const t = e.touches[0]
-                  if (zoomScale > 1 && panStart) {
-                    const dx = t.clientX - panStart.x
-                    const dy = t.clientY - panStart.y
-                    setPan({ x: panStart.panX + dx, y: panStart.panY + dy })
-                  } else if (touchStartX !== null) {
-                    setTouchDeltaX(t.clientX - touchStartX)
-                  }
-                }
-              }}
-              onTouchEnd={() => {
-                setPinchStartDist(null)
-                setPanStart(null)
-                if (zoomScale === 1 && Math.abs(touchDeltaX) > 50) {
-                  navigateImage(touchDeltaX > 0 ? 'prev' : 'next')
-                }
-                setTouchStartX(null)
-                setTouchDeltaX(0)
-              }}
-            >
-            {/* Top bar with counter and close */}
-            <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-4 sm:p-6">
-              {/* Image counter */}
-              <div
-                className="rounded-full border px-4 py-2 backdrop-blur-md"
-                style={{
-                  backgroundColor: "rgba(0,0,0,0.4)",
-                  borderColor:
-                    "color-mix(in srgb, #E6A39B 50%, transparent)",
-                }}
-              >
-                <span
-                  className="text-sm font-medium sm:text-base"
-                  style={{ color: IVORY }}
-                >
-                  {currentIndex + 1} / {galleryItems.length}
-                </span>
-              </div>
-              
-              {/* Close button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setSelectedImage(null)
-                  resetZoom()
-                }}
-                className="bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full p-2 sm:p-3 transition-all duration-200 border border-white/20 hover:border-white/40"
-                aria-label="Close lightbox"
-              >
-                <X size={20} className="sm:w-6 sm:h-6 text-white" />
-              </button>
-            </div>
-
-            {/* Navigation buttons */}
-            {galleryItems.length > 1 && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    navigateImage('prev')
-                    resetZoom()
-                  }}
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full p-3 sm:p-4 transition-all duration-200 border border-white/20 hover:border-white/40"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft size={24} className="sm:w-7 sm:h-7 text-white" />
-                </button>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    navigateImage('next')
-                    resetZoom()
-                  }}
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full p-3 sm:p-4 transition-all duration-200 border border-white/20 hover:border-white/40"
-                  aria-label="Next image"
-                >
-                  <ChevronRight size={24} className="sm:w-7 sm:h-7 text-white" />
-                </button>
-              </>
-            )}
-
-            {/* Image container */}
-            <div className="relative w-full h-full flex items-center justify-center pt-16 sm:pt-20 pb-4 sm:pb-6 overflow-hidden">
-              <div
-                className="relative inline-block max-w-full max-h-full"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Image
-                  src={selectedImage.image || "/placeholder.svg"}
-                  alt={selectedImage.text || "Gallery image"}
-                  width={1200}
-                  height={1600}
-                  sizes="100vw"
-                  priority
-                  style={{
-                    transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoomScale})`,
-                    transition: pinchStartDist ? "none" : "transform 200ms ease-out",
-                  }}
-                  className="max-w-full max-h-[75vh] w-auto h-auto sm:max-h-[85vh] object-contain rounded-lg shadow-2xl will-change-transform"
-                />
-                
-                {/* Zoom reset button */}
-                {zoomScale > 1 && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      resetZoom()
-                    }}
-                    className="absolute bottom-2 right-2 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white rounded-full px-3 py-1.5 text-xs font-medium border border-white/20 transition-all duration-200"
-                  >
-                    Reset Zoom
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Bottom hint for mobile */}
-            {galleryItems.length > 1 && (
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 sm:hidden z-20">
-                <p className="text-xs text-white/60 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5 border border-white/10">
-                  Swipe to navigate
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
+        <GalleryLightbox
+          items={galleryItems}
+          index={currentIndex}
+          onClose={() => setSelectedImage(null)}
+          onNavigate={navigateImage}
+        />
       )}
       </Section>
     </div>
