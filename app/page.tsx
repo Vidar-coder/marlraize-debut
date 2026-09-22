@@ -152,7 +152,7 @@ export default function Home() {
 
   return (
       <div className={`relative min-h-screen bg-cloud text-charcoal selection:bg-birch selection:text-nut font-sans ${pageScrollLocked ? "overflow-hidden" : ""}`}>
-        {(loadingOverlayVisible || showInvitation || enteringFromInvite) && (
+        {(showInvitation || enteringFromInvite) && (
           <motion.div
             className="invite-photo-backdrop-wrap"
             aria-hidden="true"

@@ -66,6 +66,7 @@ function MarqueeRow({
                     fill
                     sizes="(min-width: 768px) 38vw, 82vw"
                     quality={55}
+                    unoptimized
                     priority={eager}
                     draggable={false}
                     decoding="async"

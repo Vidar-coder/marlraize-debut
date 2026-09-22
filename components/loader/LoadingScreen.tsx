@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
 import { useSiteConfig } from '@/hooks/use-site-config';
+import { parseWeddingDate } from '@/lib/wedding-date';
 import {
   LOADING_BG_PHOTOS,
   PhotoMarquee,
@@ -21,9 +22,9 @@ const COUNTDOWN_BOXES = [
   { src: encodeURI('/envelope/box (1).jpeg') },
 ];
 
-const DEBUT_MARK = '/Details/debut.png';
-const DEBUT_NAME_MARK = '/Details/debut-name.png';
-const TURNS_EIGHTEEN_MARK = '/Details/turns-eighteen.png';
+const DEBUT_MARK = '/Details/debut.webp';
+const DEBUT_NAME_MARK = '/Details/debut-name.webp';
+const TURNS_EIGHTEEN_MARK = '/Details/turns-eighteen.webp';
 
 const STAGGER_DELAY_MS = 1500;
 const BOX_TRANSITION_MS = 1200;
@@ -38,24 +39,27 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
   const [progress, setProgress] = useState(0);
   const [visibleBoxes, setVisibleBoxes] = useState<number[]>([]);
   const [now, setNow] = useState(() => new Date());
-  const photoCopies = reduceMotion ? 1 : 2;
+  const onCompleteRef = useRef(onComplete);
+  const onFadeStartRef = useRef(onFadeStart);
+  onCompleteRef.current = onComplete;
+  onFadeStartRef.current = onFadeStart;
 
-  const weddingDateIso = siteConfig.wedding.date;
+  const parsedDate = useMemo(
+    () => parseWeddingDate(siteConfig.ceremony.date ?? siteConfig.wedding.date),
+    [siteConfig.ceremony.date, siteConfig.wedding.date],
+  );
 
   const countdown = useMemo(() => {
-    const weddingDate = new Date(weddingDateIso);
-    const diff = weddingDate.getTime() - now.getTime();
+    const target = new Date(`${parsedDate.month} ${parsedDate.day}, ${parsedDate.year}`);
+    if (Number.isNaN(target.getTime())) return { days: 0 };
+    const diff = target.getTime() - now.getTime();
     if (diff <= 0) return { days: 0 };
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    return { days };
-  }, [now, weddingDateIso]);
+    return { days: Math.floor(diff / (1000 * 60 * 60 * 24)) };
+  }, [now, parsedDate.day, parsedDate.month, parsedDate.year]);
 
-  const debutDateObj = useMemo(() => new Date(weddingDateIso), [weddingDateIso]);
-  const debutMonthName = debutDateObj
-    .toLocaleString('default', { month: 'short' })
-    .toUpperCase();
-  const debutDay = String(debutDateObj.getDate()).padStart(2, '0');
-  const debutYear = String(debutDateObj.getFullYear());
+  const debutMonthName = parsedDate.month.slice(0, 3);
+  const debutDay = parsedDate.day.padStart(2, '0');
+  const debutYear = parsedDate.year;
 
   const countdownNumbers = [debutMonthName, debutDay, debutYear];
   const countdownLabels = ['Month', 'Day', 'Year'];
@@ -90,24 +94,23 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
 
   useEffect(() => {
     const startTime = Date.now();
-    const progressInterval = setInterval(() => {
+    const progressInterval = window.setInterval(() => {
       const elapsed = Date.now() - startTime;
-      const pct = Math.min(100, (elapsed / TOTAL_DURATION_MS) * 100);
-      setProgress(pct);
-    }, 50);
+      setProgress(Math.min(100, (elapsed / TOTAL_DURATION_MS) * 100));
+    }, 80);
 
-    const completeTimer = setTimeout(() => {
+    const completeTimer = window.setTimeout(() => {
       setProgress(100);
-      onFadeStart?.();
+      onFadeStartRef.current?.();
       setFadeOut(true);
-      setTimeout(onComplete, FADE_OUT_MS);
+      window.setTimeout(() => onCompleteRef.current(), FADE_OUT_MS);
     }, TOTAL_DURATION_MS);
 
     return () => {
-      clearTimeout(completeTimer);
-      clearInterval(progressInterval);
+      window.clearTimeout(completeTimer);
+      window.clearInterval(progressInterval);
     };
-  }, [onComplete, onFadeStart]);
+  }, []);
 
   const debutName = siteConfig.couple.debut;
   const debutLabel = `${debutName} debut, turns eighteen`;
@@ -137,7 +140,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
       <div className="loading-screen__backdrop" aria-hidden="true">
         <PhotoMarquee
           photos={LOADING_BG_PHOTOS}
-          copies={photoCopies}
+          copies={1}
           variant="loader"
           shuffle={false}
         />
@@ -169,6 +172,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
               className="loading-screen__std-mark loading-screen__std-mark--debut"
               sizes="(min-width: 768px) 18rem, 70vw"
               style={{ height: 'auto' }}
+              unoptimized
               priority
             />
             <Image
@@ -179,6 +183,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
               className="loading-screen__std-mark loading-screen__std-mark--name"
               sizes="(min-width: 768px) 30rem, 90vw"
               style={{ height: 'auto' }}
+              unoptimized
               priority
             />
             <Image
@@ -189,6 +194,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
               className="loading-screen__std-mark loading-screen__std-mark--eighteen"
               sizes="(min-width: 768px) 26rem, 86vw"
               style={{ height: 'auto' }}
+              unoptimized
               priority
             />
           </div>
@@ -217,6 +223,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
                   fill
                   className="object-cover scale-105"
                   sizes="(max-width: 640px) 28vw, 160px"
+                  unoptimized
                 />
                 <div className="loading-screen__std-box-overlay absolute inset-0" />
                 <div className="absolute bottom-2 inset-x-0 sm:bottom-3 flex flex-col items-center">
