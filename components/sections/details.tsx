@@ -586,6 +586,10 @@ export function Details() {
                 </p>
 
                 <div className="mx-auto mt-4 max-w-2xl space-y-3 sm:mt-5 sm:space-y-4">
+                  <ReminderCard title="Date">
+                    <p>{debutDate}</p>
+                  </ReminderCard>
+
                   <ReminderCard title="Arrival" variant="accent">
                     <p>
                       Kindly arrive by {debutTime} so we may begin her debut in time.

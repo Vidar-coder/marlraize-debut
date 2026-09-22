@@ -3,7 +3,7 @@ import {
   type WeddingDetails,
   emptyWeddingDetails,
 } from "@/lib/wedding-details-types"
-import { normalizeWeddingDateString, parseWeddingDate } from "@/lib/wedding-date"
+import { parseWeddingDate } from "@/lib/wedding-date"
 
 export type SiteConfig = typeof baseSiteConfig
 
@@ -25,17 +25,15 @@ export function mergeWeddingDetailsIntoSiteConfig(
     groomNickname: pick(details.couple.groomNickname, merged.couple.groomNickname),
   }
 
-  const weddingDate = pick(
-    normalizeWeddingDateString(details.wedding.date),
-    merged.wedding.date,
-  )
-  const ceremonyDate = weddingDate || merged.ceremony.date
+  const weddingDate = merged.wedding.date
+  const ceremonyDate = merged.ceremony.date
   const ceremonyDay =
     parseWeddingDate(ceremonyDate).dayOfWeek || merged.ceremony.day
 
   merged.wedding = {
     ...merged.wedding,
     date: weddingDate,
+    time: merged.wedding.time,
     venue: pick(details.wedding.venue, merged.wedding.venue),
     tagline: pick(details.wedding.tagline, merged.wedding.tagline),
     theme: pick(details.theme, merged.wedding.theme),
@@ -45,7 +43,7 @@ export function mergeWeddingDetailsIntoSiteConfig(
     ...merged.ceremony,
     location: pick(details.ceremony.venue, merged.ceremony.location),
     venue: pick(details.ceremony.address, merged.ceremony.venue),
-    time: pick(details.ceremony.time, merged.ceremony.time),
+    time: merged.ceremony.time,
     map: pick(details.ceremony.googleMapsUrl, merged.ceremony.map),
     date: ceremonyDate,
     day: ceremonyDay,
@@ -55,9 +53,10 @@ export function mergeWeddingDetailsIntoSiteConfig(
     ...merged.reception,
     location: pick(details.reception.venue, merged.reception.location),
     venue: pick(details.reception.address, merged.reception.venue),
-    time: pick(details.reception.time, merged.reception.time),
+    time: merged.reception.time,
     map: pick(details.reception.googleMapsUrl, merged.reception.map),
     date: ceremonyDate || merged.reception.date,
+    day: ceremonyDay,
   }
 
   merged.narratives = {

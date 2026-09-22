@@ -147,6 +147,25 @@ export function LoveStory() {
         theme="light"
         layout="image-left"
         isFirst={true}
+        title="Words of Gratitude"
+        imageSrc="/mobile-background/new-debut (2).webp"
+        alt={`${debutName} with Mommy Neneng and Daddy Omar`}
+        text={
+          <>
+            <p className="mb-4">
+              Mommy Neneng and Daddy Omar,
+            </p>
+            <p>
+              Thank you for always treating me as your own and for giving me so much love, care,
+              and support. I&apos;m truly grateful to have you in my life.
+            </p>
+          </>
+        }
+      />
+
+      <StorySection
+        theme="dark"
+        layout="image-right"
         title="To My Family"
         imageSrc="/mobile-background/new-debut (1).webp"
         alt={`${debutName} with family`}
@@ -162,8 +181,8 @@ export function LoveStory() {
       />
 
       <StorySection
-        theme="dark"
-        layout="image-right"
+        theme="light"
+        layout="image-left"
         imageSrc="/mobile-background/new-debut (8).webp"
         alt={`${debutName} with friends`}
         title="To My Friends"
@@ -179,8 +198,8 @@ export function LoveStory() {
       />
 
       <StorySection
-        theme="light"
-        layout="image-left"
+        theme="dark"
+        layout="image-right"
         imageSrc="/mobile-background/new-debut (3).webp"
         alt={`${debutName} with those who guided her`}
         title="To Those Who Guided Me"
@@ -196,8 +215,8 @@ export function LoveStory() {
       />
 
       <StorySection
-        theme="dark"
-        layout="image-right"
+        theme="light"
+        layout="image-left"
         imageSrc="/mobile-background/new-debut (9).webp"
         alt={`${debutName} honoring her ninongs and ninangs`}
         title="To My Ninongs and Ninangs"
@@ -213,8 +232,8 @@ export function LoveStory() {
       />
 
       <StorySection
-        theme="light"
-        layout="image-left"
+        theme="dark"
+        layout="image-right"
         imageSrc="/mobile-background/new-debut (11).webp"
         alt={`${debutName} thinking of loved ones near and far`}
         title="To Those Near and Far"
@@ -230,8 +249,8 @@ export function LoveStory() {
       />
 
       <StorySection
-        theme="dark"
-        layout="image-right"
+        theme="light"
+        layout="image-left"
         imageSrc="/mobile-background/new-debut (6).webp"
         alt={`${debutName} grateful for every kindness`}
         title="For Every Kindness"
@@ -247,8 +266,8 @@ export function LoveStory() {
       />
 
       <StorySection
-        theme="light"
-        layout="image-left"
+        theme="dark"
+        layout="image-right"
         isLast={true}
         imageSrc="/mobile-background/new-debut (7).webp"
         alt={`${debutName} inviting guests to her debut`}

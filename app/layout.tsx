@@ -24,8 +24,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: `${siteConfig.couple.debutNickname} Debut`,
-  startDate: "2026-04-18T14:00:00+08:00",
-  endDate: "2026-04-18T22:00:00+08:00",
+  startDate: "2026-10-10T16:00:00+08:00",
+  endDate: "2026-10-10T21:00:00+08:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   location: [
